@@ -65,7 +65,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         else {
             //Alarm is wanted, and should go off
             Intent myIntent = new Intent();
-            myIntent.setClassName("com.joshbgold.movePT", "com.joshbgold.moveRehab.main.ReminderActivity");
+            myIntent.setClassName("com.joshbgold.moveRehab", "com.joshbgold.moveRehab.main.ReminderActivity");
             myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(myIntent);
         }

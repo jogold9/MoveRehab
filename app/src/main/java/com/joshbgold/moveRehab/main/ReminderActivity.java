@@ -59,7 +59,7 @@ public class ReminderActivity extends Activity {
         mediaPlayer.setVolume(volume, volume); //sets right speaker volume and left speaker volume for mediaPlayer
         mediaPlayer.start();
 
-        //Puts random movePT instruction into text view (i.e. breathe, stretch, go outside, etc).
+        //Puts random move instruction into text view (i.e. breathe, stretch, go outside, etc).
         Moves moveObject = new Moves();
         movesString = moveObject.getMoves();
         movesAndQuotesTextView.setText(movesString);
