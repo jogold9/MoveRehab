@@ -24,6 +24,17 @@ public class SettingsActivity extends Activity {
     private boolean blockNonWorkHoursAlarms = false;
     private boolean neckRetraction = false;
     private boolean neckExtension = false;
+    private boolean scapRetraction = false;
+    private boolean chestStretch = false;
+    private boolean ceilingReach = false;
+    private boolean walk = false;
+    private boolean squats = false;
+    private boolean backbends = false;
+    private boolean hamstrings = false;
+    private boolean adductor = false;
+    private boolean figure4 = false;
+    private boolean hipFlexor = false;
+    private boolean quadStretch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,33 +46,53 @@ public class SettingsActivity extends Activity {
         final CheckBox blockWeekendsCheckBox = (CheckBox)findViewById(R.id.blockWeekends);
         final CheckBox blockNonWorkHoursCheckBox = (CheckBox)findViewById(R.id.blockNonWorkDayHours);
         final CheckBox neckRetractionCheckBox = (CheckBox)findViewById(R.id.NeckRetraction);
-        final CheckBox neckExtensionCheckBox = (CheckBox)findViewById(R.id.NeckExtension);
+        final CheckBox neckExtensionCheckbox = (CheckBox)findViewById(R.id.NeckExtension);
+        final CheckBox scapRetractionCheckBox = (CheckBox)findViewById(R.id.ScapularRetraction);
+        final CheckBox chestStretchCheckBox = (CheckBox)findViewById(R.id.ChestStretch);
+        final CheckBox ReachToCeilingCheckBox = (CheckBox)findViewById(R.id.ReachToCeiling);
+        final CheckBox WalkCheckBox = (CheckBox)findViewById(R.id.Walk);
+        final CheckBox SquatsCheckBox = (CheckBox)findViewById(R.id.Squats);
+        final CheckBox BackBendsCheckBox = (CheckBox)findViewById(R.id.StandingBackBends);
+        final CheckBox HamstringsCheckBox = (CheckBox)findViewById(R.id.Hamstrings);
+        final CheckBox adductorCheckBox = (CheckBox)findViewById(R.id.adductor);
+        final CheckBox figure4CheckBox = (CheckBox)findViewById(R.id.figure4);
+        final CheckBox hipFlexorCheckBox = (CheckBox)findViewById(R.id.hipFlexor);
+        final CheckBox standingQuadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
 
         volumeControl = (SeekBar) findViewById(R.id.volumeSeekBar);
 
             volume = loadPrefs("volumeKey", volume);
-            volumeControl.setProgress((int)(volume*100));
-
+            volumeControl.setProgress((int) (volume * 100));
             repeatIntervalInMinutes = loadPrefs("repeatIntervalKey", repeatIntervalInMinutes);
+            blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
+            blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+            neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+            neckExtension = loadPrefs("neckExtension", neckExtension);
+            scapRetraction = loadPrefs();
+            chestStretch = loadPrefs();
+            ceilingReach = loadPrefs();
+            walk = loadPrefs();
+            squats = loadPrefs();
+            backbends = loadPrefs();
+            hamstrings = loadPrefs();
+            adductor = loadPrefs();
+            figure4 = loadPrefs();
+            hipFlexor = loadPrefs();
+
             repeatIntervalEditText.setText(repeatIntervalInMinutes + "");
 
-            blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
             if (blockWeekendAlarms) {
                 blockWeekendsCheckBox.setChecked(true);
             } else {
                 blockWeekendsCheckBox.setChecked(false);
             }
 
-            blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
             if (blockNonWorkHoursAlarms) {
                 blockNonWorkHoursCheckBox.setChecked(true);
             }
             else {
                 blockNonWorkHoursCheckBox.setChecked(false);
             }
-
-            neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-            neckExtension = loadPrefs("neckExtension", neckExtension);
 
             if (neckRetraction){
                 neckRetractionCheckBox.setChecked(true);
@@ -71,10 +102,10 @@ public class SettingsActivity extends Activity {
             }
 
             if (neckExtension){
-                neckExtensionCheckBox.setChecked(true);
+                neckExtensionCheckbox.setChecked(true);
             }
             else {
-                neckExtensionCheckBox.setChecked(false);
+                neckExtensionCheckbox.setChecked(false);
             }
 
         volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -129,7 +160,7 @@ public class SettingsActivity extends Activity {
                     neckRetraction = loadPrefs("neckRetraction", neckRetraction);
                 }
 
-                if (neckExtensionCheckBox.isChecked()){
+                if (neckExtensionCheckbox.isChecked()){
                     savePrefs("neckExtension", true);
                     neckExtension = loadPrefs("neckExtension", neckExtension);
                 }
