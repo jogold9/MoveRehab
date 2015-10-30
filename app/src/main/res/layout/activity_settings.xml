@@ -1,3 +1,4 @@
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="fill_parent"
@@ -8,7 +9,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
         android:id="@+id/linearLayout2"
         android:layout_marginTop="20dp">
 
@@ -67,7 +68,7 @@
             android:layout_height="45dp"
             android:paddingLeft="5dp"
             android:id="@+id/repeatIntervalInMinutes"
-            android:textSize= "36dp"
+            android:textSize= "30dp"
             android:inputType="text"
             android:ems="10"
             android:background="@drawable/buttons"
@@ -75,27 +76,47 @@
             android:maxLength="4"
             android:textAlignment="center"
             android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:text="0"/>
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout4">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/holo_blue_light"/>
+
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Block Reminders on Weekends"
+        android:text="Block Reminders on Weekends "
         android:id="@+id/blockWeekends"
         android:background="@drawable/buttons"
         android:alpha="0.50"
         android:textAllCaps="false"
         android:layout_below="@+id/linearLayout3"
         android:layout_alignLeft="@+id/linearLayout2"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:checked="false"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Block Reminders Outside 9 a.m. - 5 p.m."
+        android:text="Block Reminders Outside 9 a.m. - 5 p.m. "
         android:id="@+id/blockNonWorkDayHours"
         android:background="@drawable/buttons"
         android:alpha="0.50"
@@ -104,7 +125,200 @@
         android:layout_alignLeft="@+id/linearLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:checked="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/holo_blue_light"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neck Retraction "
+        android:id="@+id/NeckRetraction"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/blockNonWorkDayHours"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:checked="false"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neck Extension "
+        android:id="@+id/NeckExtension"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/NeckRetraction"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scapular retraction "
+        android:id="@+id/ScapularRetraction"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/NeckExtension"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chest Stretch w/ hands behind back "
+        android:id="@+id/ChestStretch"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/ScapularRetraction"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reach to ceiling "
+        android:id="@+id/ReachToCeiling"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/ChestStretch"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Walk "
+        android:id="@+id/Walk"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/ReachToCeiling"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Squats "
+        android:id="@+id/Squats"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/Walk"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Standing back bends "
+        android:id="@+id/StandingBackBends"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/Squats"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hamstrings "
+        android:id="@+id/Hamstrings"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/StandingBackBends"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adductor: Legs apart, lean to side "
+        android:id="@+id/adductor"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/Hamstrings"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Figure 4 sitting, foot on knee, back straight, lean forward "
+        android:id="@+id/figure4"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/adductor"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hip flexor in 1/2 kneeling "
+        android:id="@+id/hipFlexor"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/figure4"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:checked="false"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Standing quadriceps stretch "
+        android:id="@+id/standingQuadStretch"
+        android:background="@drawable/buttons"
+        android:alpha="0.50"
+        android:textAllCaps="false"
+        android:layout_below="@+id/hipFlexor"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:checked="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/holo_blue_light"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -116,7 +330,10 @@
         android:id="@+id/backButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
