@@ -1,17 +1,21 @@
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:context=".MainActivity"
-                android:background="@drawable/ancient_art">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:background="@drawable/ancient_art">
+
+<RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:id="@+id/linearLayout2"
-        android:layout_marginTop="20dp">
+        android:id="@+id/linearLayout2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +28,7 @@
             android:layout_marginRight="5dp"
             android:textAlignment="center"
             android:paddingTop="5dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         <SeekBar
@@ -35,7 +39,7 @@
             android:id="@+id/volumeSeekBar"
             android:progress="50"
             android:layout_weight="1"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             />
 
 
@@ -81,19 +85,15 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/linearLayout4">
+        android:id="@+id/linearLayout4"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <View
             android:layout_width="match_parent"
@@ -334,6 +334,5 @@
         android:layout_marginBottom="20dp"/>
     </LinearLayout>
 
-    </ScrollView>
-
 </RelativeLayout>
+</ScrollView>
