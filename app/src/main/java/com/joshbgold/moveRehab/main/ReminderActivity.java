@@ -27,6 +27,7 @@ public class ReminderActivity extends Activity {
     private String movesString = "";
     private static PendingIntent pendingIntent;
     private float volume = (float) 0.5;
+    //Context context = getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

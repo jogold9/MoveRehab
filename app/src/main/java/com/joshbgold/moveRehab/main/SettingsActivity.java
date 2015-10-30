@@ -22,7 +22,8 @@ public class SettingsActivity extends Activity {
     private int repeatIntervalInMinutes = 0;  //Number of minutes that user wants alarm to repeat at (optional)
     private boolean blockWeekendAlarms = false;
     private boolean blockNonWorkHoursAlarms = false;
-
+    private boolean neckRetraction = false;
+    private boolean neckExtension = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class SettingsActivity extends Activity {
         final Button backButton = (Button) findViewById(R.id.backButton);
         final CheckBox blockWeekendsCheckBox = (CheckBox)findViewById(R.id.blockWeekends);
         final CheckBox blockNonWorkHoursCheckBox = (CheckBox)findViewById(R.id.blockNonWorkDayHours);
+        final CheckBox neckRetractionCheckBox = (CheckBox)findViewById(R.id.NeckRetraction);
+        final CheckBox neckExtensionCheckBox = (CheckBox)findViewById(R.id.NeckExtension);
 
         volumeControl = (SeekBar) findViewById(R.id.volumeSeekBar);
 
@@ -55,6 +58,23 @@ public class SettingsActivity extends Activity {
             }
             else {
                 blockNonWorkHoursCheckBox.setChecked(false);
+            }
+
+            neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+            neckExtension = loadPrefs("neckExtension", neckExtension);
+
+            if (neckRetraction){
+                neckRetractionCheckBox.setChecked(true);
+            }
+            else {
+                neckRetractionCheckBox.setChecked(false);
+            }
+
+            if (neckExtension){
+                neckExtensionCheckBox.setChecked(true);
+            }
+            else {
+                neckExtensionCheckBox.setChecked(false);
             }
 
         volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -98,6 +118,24 @@ public class SettingsActivity extends Activity {
                 else {
                     savePrefs("workHoursOnlyKey", false);
                     blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+                }
+
+                if (neckRetractionCheckBox.isChecked()){
+                    savePrefs("neckRetraction", true);
+                    neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+                }
+                else {
+                    savePrefs("neckRetraction", false);
+                    neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+                }
+
+                if (neckExtensionCheckBox.isChecked()){
+                    savePrefs("neckExtension", true);
+                    neckExtension = loadPrefs("neckExtension", neckExtension);
+                }
+                else {
+                    savePrefs("neckExtension", false);
+                    neckExtension = loadPrefs("neckExtension", neckExtension);
                 }
 
                 savePrefs("volumeKey", volume);
