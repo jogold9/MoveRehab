@@ -6,18 +6,16 @@ package com.joshbgold.moveRehab.content;
 public class Moves {
 
     //actions to do
-    public String [] defaultMovementsArray = {  //these are used in the reminder if user does not make any selections in settings
-            "walk, squats"
-    };
+    public String defaultMovementsArray = "walk, squats";  //these are used in the reminder if user does not make any selections in settings
+
+    public String rehabMovements = ""; //these is where the user's selected rehab movements will go;
 
     public String getMoves(){
 
-        //Randomly select a movement from the array of movements
-   /*     Random randomGenerator = new Random();  //Construct a new random number generator
-        int randomNumber = randomGenerator.nextInt(defaultMovementsArray.length);*/
+        //if rehabMovementsArray is null
+        String movements = defaultMovementsArray;
 
-        String movements = defaultMovementsArray[0];
-
+        //else String movements = rehabMovements;
         return movements;
     }
 }
