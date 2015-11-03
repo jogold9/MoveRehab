@@ -24,7 +24,7 @@ public class ReminderActivity extends Activity {
 
     AlarmManager alarmManager;
     private TextView movesAndQuotesTextView;
-    private String movesString = "";
+    private StringBuilder movesString = new StringBuilder();
     private static PendingIntent pendingIntent;
     private float volume = (float) 0.5;
     //Context context = getApplicationContext();

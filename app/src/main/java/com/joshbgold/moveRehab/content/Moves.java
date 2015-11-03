@@ -6,15 +6,13 @@ import android.content.SharedPreferences;
 
 import com.joshbgold.moveRehab.main.AlarmActivity;
 
+import java.util.ArrayList;
+
 public class Moves extends Activity {
 
     private static Context mAppContext = AlarmActivity.getAppContext();
 
-    //these are used in the reminder if user does not make any selections in settings
-    public String defaultMovements = "This is your reminder to walk and do squats.";
-    public String rehabMovements = ""; //these is where the user's selected rehab movements will be concatenated/added to;
-
-    //http://www.javatpoint.com/string-concatenation-in-java
+    public ArrayList<String> movementsArrayList = new ArrayList<String>();
 
     public boolean neckRetraction = false;
     public boolean neckExtension = false;
@@ -29,25 +27,10 @@ public class Moves extends Activity {
     private boolean figure4 = false;
     private boolean hipFlexor = false;
     private boolean quadStretch = false;
-    public String neckRetractionString = "";
-    public String neckExtensionString = "";
-    public String scapRetractionString = "";
-    public String chestStretchString = "";
-    public String ceilingReachString = "";
-    public String walkString = "";
-    public String squatsString = "";
-    public String backbendsString = "";
-    public String hamstringsString = "";
-    public String adductorString = "";
-    public String figure4String = "";
-    public String hipFlexorString = "";
-    public String quadStretchString = "";
 
-    public String getMoves(){
-        String movements;
+    public StringBuilder getMoves(){
+        StringBuilder movements = new StringBuilder();
 
-        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-        neckExtension = loadPrefs("neckExtension", neckExtension);
         neckRetraction = loadPrefs("neckRetraction", neckRetraction);
         neckExtension = loadPrefs("neckExtension", neckExtension);
         scapRetraction = loadPrefs("scapRetraction", scapRetraction);
@@ -63,19 +46,60 @@ public class Moves extends Activity {
         quadStretch = loadPrefs("quadStretch", quadStretch);
 
         if (neckRetraction){
-            neckRetractionString = "neck retraction ";
+            movementsArrayList.add("neck retraction");
         }
-
         if (neckExtension){
-            neckExtensionString = "neck extension ";
+            movementsArrayList.add("neck extension");
+        }
+        if (scapRetraction){
+            movementsArrayList.add("scapular retraction");
+        }
+        if (chestStretch){
+            movementsArrayList.add("chest stretch");
+        }
+        if (ceilingReach){
+            movementsArrayList.add("ceiling reach");
+        }
+        if (walk){
+            movementsArrayList.add("walk");
+        }
+        if(squats){
+            movementsArrayList.add("squats");
+        }
+        if(backbends){
+            movementsArrayList.add("backbends");
+        }
+        if(hamstrings){
+            movementsArrayList.add("hamstrings");
+        }
+        if(adductor){
+            movementsArrayList.add("adductor");
+        }
+        if(figure4){
+            movementsArrayList.add("figure 4");
+        }
+        if(hipFlexor){
+            movementsArrayList.add("hip flecor stretch");
+        }
+        if(quadStretch){
+            movementsArrayList.add("quadriceps stretch");
         }
 
-        rehabMovements = neckRetractionString +  neckExtensionString;
-
-        if(rehabMovements.equals("")) {
-            movements = defaultMovements;
+        //here we get the ArrayList content that the user specified in the checkboxes
+        if (movementsArrayList.isEmpty()){
+            movements.append("Walk now! It's critical for your brain health and physical health.");
         }
-        else movements = rehabMovements;
+        else if (movementsArrayList.size() == 1){
+            movements.append(movementsArrayList.get(0));
+        }
+
+        //adds the 1st alement of the arrayList to the string. Then for the rest, it adds commas space and the string
+        else {
+            movements.append(movementsArrayList.get(0).toString());
+            for (int i = 1; i < movementsArrayList.size(); i++){
+                movements.append(", ").append(movementsArrayList.get(i).toString());
+            }
+        }
 
         return movements;
     }
