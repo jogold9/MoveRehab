@@ -49,7 +49,7 @@ public class SettingsActivity extends Activity {
         final CheckBox neckExtensionCheckbox = (CheckBox)findViewById(R.id.NeckExtension);
         final CheckBox scapRetractionCheckBox = (CheckBox)findViewById(R.id.ScapularRetraction);
         final CheckBox chestStretchCheckBox = (CheckBox)findViewById(R.id.ChestStretch);
-        final CheckBox ReachToCeilingCheckBox = (CheckBox)findViewById(R.id.ReachToCeiling);
+        final CheckBox ceilingReachCheckbox = (CheckBox)findViewById(R.id.ReachToCeiling);
         final CheckBox WalkCheckBox = (CheckBox)findViewById(R.id.Walk);
         final CheckBox SquatsCheckBox = (CheckBox)findViewById(R.id.Squats);
         final CheckBox BackBendsCheckBox = (CheckBox)findViewById(R.id.StandingBackBends);
@@ -57,56 +57,119 @@ public class SettingsActivity extends Activity {
         final CheckBox adductorCheckBox = (CheckBox)findViewById(R.id.adductor);
         final CheckBox figure4CheckBox = (CheckBox)findViewById(R.id.figure4);
         final CheckBox hipFlexorCheckBox = (CheckBox)findViewById(R.id.hipFlexor);
-        final CheckBox standingQuadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
+        final CheckBox quadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
 
         volumeControl = (SeekBar) findViewById(R.id.volumeSeekBar);
 
-            volume = loadPrefs("volumeKey", volume);
-            volumeControl.setProgress((int) (volume * 100));
-            repeatIntervalInMinutes = loadPrefs("repeatIntervalKey", repeatIntervalInMinutes);
-            blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
-            blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-            neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-            neckExtension = loadPrefs("neckExtension", neckExtension);
-            scapRetraction = loadPrefs();
-            chestStretch = loadPrefs();
-            ceilingReach = loadPrefs();
-            walk = loadPrefs();
-            squats = loadPrefs();
-            backbends = loadPrefs();
-            hamstrings = loadPrefs();
-            adductor = loadPrefs();
-            figure4 = loadPrefs();
-            hipFlexor = loadPrefs();
+        volume = loadPrefs("volumeKey", volume);
+        volumeControl.setProgress((int) (volume * 100));
+        repeatIntervalInMinutes = loadPrefs("repeatIntervalKey", repeatIntervalInMinutes);
+        blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
+        blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+        neckExtension = loadPrefs("neckExtension", neckExtension);
+        scapRetraction = loadPrefs("scapRetraction", scapRetraction);
+        chestStretch = loadPrefs("chestStretch", chestStretch);
+        ceilingReach = loadPrefs("ceilingReach", ceilingReach);
+        walk = loadPrefs("walk", walk);
+        squats = loadPrefs("squats", squats);
+        backbends = loadPrefs("backbends", backbends);
+        hamstrings = loadPrefs("hamstrings", hamstrings);
+        adductor = loadPrefs("adductor", adductor);
+        figure4 = loadPrefs("figure4", figure4);
+        hipFlexor = loadPrefs("hipFlexor", hipFlexor);
+        quadStretch = loadPrefs("quadStretch", quadStretch);
 
-            repeatIntervalEditText.setText(repeatIntervalInMinutes + "");
+        repeatIntervalEditText.setText(repeatIntervalInMinutes + "");
 
-            if (blockWeekendAlarms) {
-                blockWeekendsCheckBox.setChecked(true);
-            } else {
-                blockWeekendsCheckBox.setChecked(false);
-            }
+        if (blockWeekendAlarms) {
+            blockWeekendsCheckBox.setChecked(true);
+        } else {
+            blockWeekendsCheckBox.setChecked(false);
+        }
 
-            if (blockNonWorkHoursAlarms) {
-                blockNonWorkHoursCheckBox.setChecked(true);
-            }
-            else {
-                blockNonWorkHoursCheckBox.setChecked(false);
-            }
+        if (blockNonWorkHoursAlarms) {
+            blockNonWorkHoursCheckBox.setChecked(true);
+        } else {
+            blockNonWorkHoursCheckBox.setChecked(false);
+        }
 
-            if (neckRetraction){
-                neckRetractionCheckBox.setChecked(true);
-            }
-            else {
-                neckRetractionCheckBox.setChecked(false);
-            }
+        if (neckRetraction){
+            neckRetractionCheckBox.setChecked(true);
+        } else {
+            neckRetractionCheckBox.setChecked(false);
+        }
 
-            if (neckExtension){
-                neckExtensionCheckbox.setChecked(true);
-            }
-            else {
-                neckExtensionCheckbox.setChecked(false);
-            }
+        if (neckExtension){
+            neckExtensionCheckbox.setChecked(true);
+        } else {
+            neckExtensionCheckbox.setChecked(false);
+        }
+
+        if (scapRetraction){
+            scapRetractionCheckBox.setChecked(true);
+        } else {
+            scapRetractionCheckBox.setChecked(false);
+        }
+
+        if (chestStretch){
+            chestStretchCheckBox.setChecked(true);
+        } else {
+            chestStretchCheckBox.setChecked(false);
+        }
+
+        if (ceilingReach) {
+            ceilingReachCheckbox.setChecked(true);
+        } else {
+            ceilingReachCheckbox.setChecked(false);
+        }
+
+        if (walk) {
+            WalkCheckBox.setChecked(true);
+        } else {
+            WalkCheckBox.setChecked(false);
+        }
+
+        if (squats){
+            SquatsCheckBox.setChecked(true);
+        } else {
+            SquatsCheckBox.setChecked(false);
+        }
+
+        if (backbends){
+            BackBendsCheckBox.setChecked(true);
+        } else {
+            BackBendsCheckBox.setChecked(false);
+        }
+
+        if (hamstrings){
+            HamstringsCheckBox.setChecked(true);
+        } else {
+            HamstringsCheckBox.setChecked(false );
+        }
+        if (adductor){
+            adductorCheckBox.setChecked(true);
+        } else {
+            adductorCheckBox.setChecked(false);
+        }
+
+        if (figure4){
+            figure4CheckBox.setChecked(true);
+        } else {
+            figure4CheckBox.setChecked(false);
+        }
+
+        if(hipFlexor){
+            hipFlexorCheckBox.setChecked(true);
+        } else {
+            hipFlexorCheckBox.setChecked(false);
+        }
+
+        if(quadStretch){
+            quadStretchCheckBox.setChecked(true);
+        } else {
+            quadStretchCheckBox.setChecked(false);
+        }
 
         volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 0;
@@ -131,45 +194,114 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                //saves user preference for whether to have alarm on weekends
+                //The following code saves user preferences
+                savePrefs("volumeKey", volume);
+
                 if (blockWeekendsCheckBox.isChecked()){
                     savePrefs("noWeekendsKey", true);
-                    blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
-                }
-                else{
+                } else{
                     savePrefs("noWeekendsKey", false);
-                    blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
                 }
 
-                //saves user preference for alarm during work hours / non-work hours
                 if (blockNonWorkHoursCheckBox.isChecked()){
                     savePrefs("workHoursOnlyKey", true);
-                    blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-                }
-                else {
+                } else {
                     savePrefs("workHoursOnlyKey", false);
-                    blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
                 }
 
                 if (neckRetractionCheckBox.isChecked()){
                     savePrefs("neckRetraction", true);
-                    neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-                }
-                else {
+                } else {
                     savePrefs("neckRetraction", false);
-                    neckRetraction = loadPrefs("neckRetraction", neckRetraction);
                 }
 
                 if (neckExtensionCheckbox.isChecked()){
                     savePrefs("neckExtension", true);
-                    neckExtension = loadPrefs("neckExtension", neckExtension);
-                }
-                else {
+                } else {
                     savePrefs("neckExtension", false);
-                    neckExtension = loadPrefs("neckExtension", neckExtension);
                 }
 
-                savePrefs("volumeKey", volume);
+                if (scapRetractionCheckBox.isChecked()){
+                    savePrefs("scapRetraction", true);
+                } else {
+                    savePrefs("scapRetraction", false);
+                }
+
+                if (chestStretchCheckBox.isChecked()) {
+                    savePrefs("chestStretch", true);
+                } else {
+                    savePrefs("chestStretch", false);
+                }
+
+                if (ceilingReachCheckbox.isChecked()) {
+                    savePrefs("ceilingReach", true);
+                } else {
+                    savePrefs("ceilingReach", false);
+                }
+
+                if (WalkCheckBox.isChecked()){
+                    savePrefs("walk", true);
+                } else {
+                    savePrefs("walk", false);
+                }
+
+                if (SquatsCheckBox.isChecked()){
+                    savePrefs("squats", true);
+                } else {
+                    savePrefs("squats", false);
+                }
+
+                if (BackBendsCheckBox.isChecked()){
+                    savePrefs("backbends", true);
+                } else {
+                    savePrefs("backbends", false);
+                }
+
+                if(HamstringsCheckBox.isChecked()){
+                    savePrefs("hamstrings", true);
+                } else {
+                    savePrefs("hamstrings", false);
+                }
+
+                if(adductorCheckBox.isChecked()){
+                    savePrefs("adductor", true);
+                } else {
+                    savePrefs("adductor", false);
+                }
+
+                if(figure4CheckBox.isChecked()){
+                    savePrefs("figure4", true);
+                } else {
+                    savePrefs("figure4", false);
+                }
+
+                if(hipFlexorCheckBox.isChecked()){
+                    savePrefs("hipFlexor", true);
+                } else {
+                    savePrefs("hipFlexor", false);
+                }
+
+                if(quadStretchCheckBox.isChecked()){
+                    savePrefs("quadStretch", true);
+                } else {
+                    savePrefs("quadStretch", true);
+                }
+
+                blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
+                blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+                neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+                neckExtension = loadPrefs("neckExtension", neckExtension);
+                scapRetraction = loadPrefs("scapRetraction", scapRetraction);
+                chestStretch = loadPrefs("chestStretch", chestStretch);
+                ceilingReach = loadPrefs("ceilingReach", ceilingReach);
+                walk = loadPrefs("walk", walk);
+                squats = loadPrefs("squats", squats);
+                backbends = loadPrefs("backbends", backbends);
+                hamstrings = loadPrefs("hamstrings", hamstrings);
+                adductor = loadPrefs("adductor", adductor);
+                figure4 = loadPrefs("figure4", figure4);
+                hipFlexor = loadPrefs("hipFlexor", hipFlexor);
+                quadStretch = loadPrefs("quadStretch", quadStretch);
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
@@ -185,8 +317,7 @@ public class SettingsActivity extends Activity {
                         if (repeatIntervalAsInt != 0 && repeatIntervalAsInt < 2 || repeatIntervalAsInt > 1440){
                             Toast.makeText(SettingsActivity.this, "Please enter a number between 2 and 1440, or leave blank for a one-time alarm.",
                                     Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             repeatIntervalInMinutes = Integer.valueOf(repeatIntervalAsString);
                             savePrefs("repeatIntervalKey", repeatIntervalInMinutes);
                             finish();
@@ -219,7 +350,6 @@ public class SettingsActivity extends Activity {
         editor.commit();
     }
 
-    //save prefs
     public void savePrefs(String key, boolean value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -233,13 +363,11 @@ public class SettingsActivity extends Activity {
          return sharedPreferences.getFloat(key, value);
     }
 
-    //get prefs
     private int loadPrefs(String key,int value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getInt(key, value);
     }
 
-    //get prefs
     private boolean loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
