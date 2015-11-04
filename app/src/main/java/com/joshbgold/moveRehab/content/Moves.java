@@ -12,44 +12,47 @@ public class Moves extends Activity {
 
     private static Context mAppContext = AlarmActivity.getAppContext();
 
-    public ArrayList<String> movementsArrayList = new ArrayList<String>();
+    public ArrayList<String> movementsArrayList = new ArrayList<>();
 
-    public boolean neckRetraction = false;
+    public boolean adductor = false;
+    public boolean backbends = false;
+    public boolean ceilingReach = false;
+    public boolean chestStretch = false;
+    public boolean figure4 = false;
+    public boolean hamstrings = false;
+    public boolean hipFlexor = false;
     public boolean neckExtension = false;
-    private boolean scapRetraction = false;
-    private boolean chestStretch = false;
-    private boolean ceilingReach = false;
-    private boolean walk = false;
-    private boolean squats = false;
-    private boolean backbends = false;
-    private boolean hamstrings = false;
-    private boolean adductor = false;
-    private boolean figure4 = false;
-    private boolean hipFlexor = false;
-    private boolean quadStretch = false;
+    public boolean neckRetraction = false;
+    public boolean quadStretch = false;
+    public boolean scapRetraction = false;
+    public boolean squats = false;
+    public boolean walk = false;
+
+    public Moves() {
+
+        adductor = loadPrefs("adductor", adductor);
+        backbends = loadPrefs("backbends", backbends);
+        chestStretch = loadPrefs("chestStretch", chestStretch);
+        ceilingReach = loadPrefs("ceilingReach", ceilingReach);
+        figure4 = loadPrefs("figure4", figure4);
+        hamstrings = loadPrefs("hamstrings", hamstrings);
+        hipFlexor = loadPrefs("hipFlexor", hipFlexor);
+        neckExtension = loadPrefs("neckExtension", neckExtension);
+        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+        quadStretch = loadPrefs("quadStretch", quadStretch);
+        scapRetraction = loadPrefs("scapRetraction", scapRetraction);
+        squats = loadPrefs("squats", squats);
+        walk = loadPrefs("walk", walk);
+    }
 
     public StringBuilder getMoves(){
         StringBuilder movements = new StringBuilder();
-
-        neckRetraction = loadPrefs("neckRetraction", false);
-        neckExtension = loadPrefs("neckExtension", false);
-        scapRetraction = loadPrefs("scapRetraction", false);
-        chestStretch = loadPrefs("chestStretch", false);
-        ceilingReach = loadPrefs("ceilingReach", false);
-        walk = loadPrefs("walk", false);
-        squats = loadPrefs("squats", false);
-        backbends = loadPrefs("backbends", false);
-        hamstrings = loadPrefs("hamstrings", false);
-        adductor = loadPrefs("adductor", false);
-        figure4 = loadPrefs("figure4", false);
-        hipFlexor = loadPrefs("hipFlexor", false);
-        quadStretch = loadPrefs("quadStretch", false);
 
         if(adductor){
             movementsArrayList.add("adductor");
         }
         if(backbends){
-            movementsArrayList.add("backbends");
+            movementsArrayList.add("back bends");
         }
         if (ceilingReach){
             movementsArrayList.add("ceiling reach");
@@ -64,7 +67,7 @@ public class Moves extends Activity {
             movementsArrayList.add("hamstrings");
         }
         if(hipFlexor){
-            movementsArrayList.add("hip flecor stretch");
+            movementsArrayList.add("hip flexor stretch");
         }
         if (neckExtension){
             movementsArrayList.add("neck extension");

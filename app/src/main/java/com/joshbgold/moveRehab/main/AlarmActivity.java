@@ -168,9 +168,13 @@ public class AlarmActivity extends Activity {
                 alarmManager.setRepeating(AlarmManager.RTC, alarmTime.getTimeInMillis(), repeatIntervalMilliseconds, pendingIntent);
                 AlarmReceiver alarmReceiver = new AlarmReceiver(this); //http://stackoverflow.com/questions/16678763/the-method-getapplicationcontext-is-undefined
 
+                if (repeatIntervalHours == 1){
+                    Toast.makeText(AlarmActivity.this, "Your reminder is now set for " + hourSet + ":" + minuteSetString + amPmlabel + " and will " +
+                            "repeat " + "every hour.", Toast.LENGTH_LONG).show();}
+                else {
                     Toast.makeText(AlarmActivity.this, "Your reminder is now set for " + hourSet + ":" + minuteSetString + amPmlabel + " and will " +
                             "repeat " + "every " + repeatIntervalHours + " hours.", Toast.LENGTH_LONG).show();
-
+                }
             }
 
         } else {
