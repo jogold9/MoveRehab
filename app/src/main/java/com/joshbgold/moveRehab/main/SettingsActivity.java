@@ -284,7 +284,7 @@ public class SettingsActivity extends Activity {
                 if(quadStretchCheckBox.isChecked()){
                     savePrefs("quadStretch", true);
                 } else {
-                    savePrefs("quadStretch", true);
+                    savePrefs("quadStretch", false);
                 }
 
                 blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
