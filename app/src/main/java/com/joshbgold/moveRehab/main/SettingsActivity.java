@@ -315,7 +315,8 @@ public class SettingsActivity extends Activity {
                     else {
                         Integer repeatIntervalAsInt = Integer.parseInt(repeatIntervalAsString);
                         if (repeatIntervalAsInt != 0 && repeatIntervalAsInt < 1 || repeatIntervalAsInt > 24){
-                            Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24, or leave blank for a one-time alarm.",
+                            Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24 for the repeat interval, or leave blank " +
+                                            "for a one-time alarm.",
                                     Toast.LENGTH_LONG).show();
                         } else {
                             repeatIntervalInHours = Integer.valueOf(repeatIntervalAsString);
@@ -325,7 +326,8 @@ public class SettingsActivity extends Activity {
                     }
 
                 } catch (NumberFormatException exception) {
-                    Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24, or leave blank for a one-time alarm.", Toast
+                    Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24 for the repeat interval, or leave blank for a " +
+                            "one-time alarm.", Toast
                             .LENGTH_LONG).show();
                 }
             }
