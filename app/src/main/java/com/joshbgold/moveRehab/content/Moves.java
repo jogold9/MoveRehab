@@ -31,58 +31,58 @@ public class Moves extends Activity {
     public StringBuilder getMoves(){
         StringBuilder movements = new StringBuilder();
 
-        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-        neckExtension = loadPrefs("neckExtension", neckExtension);
-        scapRetraction = loadPrefs("scapRetraction", scapRetraction);
-        chestStretch = loadPrefs("chestStretch", chestStretch);
-        ceilingReach = loadPrefs("ceilingReach", ceilingReach);
-        walk = loadPrefs("walk", walk);
-        squats = loadPrefs("squats", squats);
-        backbends = loadPrefs("backbends", backbends);
-        hamstrings = loadPrefs("hamstrings", hamstrings);
-        adductor = loadPrefs("adductor", adductor);
-        figure4 = loadPrefs("figure4", figure4);
-        hipFlexor = loadPrefs("hipFlexor", hipFlexor);
-        quadStretch = loadPrefs("quadStretch", quadStretch);
+        neckRetraction = loadPrefs("neckRetraction", false);
+        neckExtension = loadPrefs("neckExtension", false);
+        scapRetraction = loadPrefs("scapRetraction", false);
+        chestStretch = loadPrefs("chestStretch", false);
+        ceilingReach = loadPrefs("ceilingReach", false);
+        walk = loadPrefs("walk", false);
+        squats = loadPrefs("squats", false);
+        backbends = loadPrefs("backbends", false);
+        hamstrings = loadPrefs("hamstrings", false);
+        adductor = loadPrefs("adductor", false);
+        figure4 = loadPrefs("figure4", false);
+        hipFlexor = loadPrefs("hipFlexor", false);
+        quadStretch = loadPrefs("quadStretch", false);
 
-        if (neckRetraction){
-            movementsArrayList.add("neck retraction");
-        }
-        if (neckExtension){
-            movementsArrayList.add("neck extension");
-        }
-        if (scapRetraction){
-            movementsArrayList.add("scapular retraction");
-        }
-        if (chestStretch){
-            movementsArrayList.add("chest stretch");
-        }
-        if (ceilingReach){
-            movementsArrayList.add("ceiling reach");
-        }
-        if (walk){
-            movementsArrayList.add("walk");
-        }
-        if(squats){
-            movementsArrayList.add("squats");
+        if(adductor){
+            movementsArrayList.add("adductor");
         }
         if(backbends){
             movementsArrayList.add("backbends");
         }
-        if(hamstrings){
-            movementsArrayList.add("hamstrings");
+        if (ceilingReach){
+            movementsArrayList.add("ceiling reach");
         }
-        if(adductor){
-            movementsArrayList.add("adductor");
+        if (chestStretch){
+            movementsArrayList.add("chest stretch");
         }
         if(figure4){
             movementsArrayList.add("figure 4");
         }
+        if(hamstrings){
+            movementsArrayList.add("hamstrings");
+        }
         if(hipFlexor){
             movementsArrayList.add("hip flecor stretch");
         }
+        if (neckExtension){
+            movementsArrayList.add("neck extension");
+        }
+        if (neckRetraction){
+            movementsArrayList.add("neck retraction");
+        }
         if(quadStretch){
             movementsArrayList.add("quadriceps stretch");
+        }
+        if (scapRetraction){
+            movementsArrayList.add("scapular retraction");
+        }
+        if(squats){
+            movementsArrayList.add("squats");
+        }
+        if (walk){
+            movementsArrayList.add("walk");
         }
 
         //here we get the ArrayList content that the user specified in the checkboxes
