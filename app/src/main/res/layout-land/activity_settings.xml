@@ -14,86 +14,195 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/linearLayout2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:background="#FFFFFF"
-                android:alpha="0.50"
-                android:text=" Volume: "
-                android:id="@+id/volumeTextView"
-                android:layout_marginRight="5dp"
-                android:textAlignment="center"
-                android:paddingTop="5dp"
-                android:layout_marginTop="20dp"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
-
-            <SeekBar
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:id="@+id/volumeSeekBar"
-                android:progress="50"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/linearLayout3"
-            android:layout_below="@+id/linearLayout2"
-            android:layout_alignLeft="@+id/linearLayout2"
-            android:layout_marginTop="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:background="#FFFFFF"
-                android:alpha="0.50"
-                android:text=" Repeat Interval (Min): "
-                android:id="@+id/repeatInterval"
-                android:layout_marginRight="5dp"
-                android:textAlignment="center"
-                android:paddingTop="5dp"
-                />
-
-            <EditText
-                android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:paddingLeft="5dp"
-                android:id="@+id/repeatIntervalInMinutes"
-                android:textSize= "30dp"
-                android:inputType="text"
-                android:ems="10"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:maxLength="4"
-                android:textAlignment="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="0"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/linearLayout4"
             android:layout_below="@+id/linearLayout3"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adductor: Legs apart, lean to side "
+                android:id="@+id/adductor"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/Hamstrings"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chest Stretch w/ hands behind back "
+                android:id="@+id/ChestStretch"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/ScapularRetraction"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Figure 4 sitting, foot on knee, back straight, lean forward "
+                android:id="@+id/figure4"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/adductor"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hamstrings "
+                android:id="@+id/Hamstrings"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/StandingBackBends"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hip flexor in 1/2 kneeling "
+                android:id="@+id/hipFlexor"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/figure4"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neck Extension "
+                android:id="@+id/NeckExtension"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/NeckRetraction"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neck Retraction "
+                android:id="@+id/NeckRetraction"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/blockNonWorkDayHours"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reach to ceiling "
+                android:id="@+id/ReachToCeiling"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/ChestStretch"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scapular retraction "
+                android:id="@+id/ScapularRetraction"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/NeckExtension"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Squats "
+                android:id="@+id/Squats"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/Walk"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standing back bends "
+                android:id="@+id/StandingBackBends"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/Squats"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standing quadriceps stretch "
+                android:id="@+id/standingQuadStretch"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/hipFlexor"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Walk "
+                android:id="@+id/Walk"
+                android:background="@drawable/buttons"
+                android:alpha="0.50"
+                android:textAllCaps="false"
+                android:layout_below="@+id/ReachToCeiling"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:checked="false"/>
 
             <View
                 android:layout_width="match_parent"
@@ -133,187 +242,78 @@
                 android:layout_height="2dp"
                 android:background="@android:color/holo_blue_light"/>
 
-            <CheckBox
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Neck Retraction "
-                android:id="@+id/NeckRetraction"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/blockNonWorkDayHours"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:checked="false"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Neck Extension "
-                android:id="@+id/NeckExtension"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/NeckRetraction"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                android:id="@+id/linearLayout2">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scapular retraction "
-                android:id="@+id/ScapularRetraction"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/NeckExtension"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chest Stretch w/ hands behind back "
-                android:id="@+id/ChestStretch"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/ScapularRetraction"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                    android:background="#FFFFFF"
+                    android:alpha="0.50"
+                    android:text=" Volume: "
+                    android:id="@+id/volumeTextView"
+                    android:layout_marginRight="5dp"
+                    android:textAlignment="center"
+                    android:paddingTop="5dp"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reach to ceiling "
-                android:id="@+id/ReachToCeiling"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/ChestStretch"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                <SeekBar
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttons"
+                    android:alpha="0.50"
+                    android:id="@+id/volumeSeekBar"
+                    android:progress="50"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Walk "
-                android:id="@+id/Walk"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/ReachToCeiling"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Squats "
-                android:id="@+id/Squats"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/Walk"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+            </LinearLayout>
 
-            <CheckBox
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Standing back bends "
-                android:id="@+id/StandingBackBends"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/Squats"
-                android:layout_alignLeft="@+id/linearLayout2"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                android:id="@+id/linearLayout3"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_alignLeft="@+id/linearLayout2"
+                android:layout_marginTop="5dp">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hamstrings "
-                android:id="@+id/Hamstrings"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/StandingBackBends"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                    android:background="#FFFFFF"
+                    android:alpha="0.50"
+                    android:text=" Repeat Interval (Hours): "
+                    android:id="@+id/repeatInterval"
+                    android:layout_marginRight="5dp"
+                    android:textAlignment="center"
+                    android:paddingTop="5dp"
+                    />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adductor: Legs apart, lean to side "
-                android:id="@+id/adductor"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/Hamstrings"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/repeatIntervalInMinutes"
+                    android:textSize= "30dp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:background="@drawable/buttons"
+                    android:alpha="0.50"
+                    android:maxLength="2"
+                    android:textAlignment="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"/>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Figure 4 sitting, foot on knee, back straight, lean forward "
-                android:id="@+id/figure4"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/adductor"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hip flexor in 1/2 kneeling "
-                android:id="@+id/hipFlexor"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/figure4"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:checked="false"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Standing quadriceps stretch "
-                android:id="@+id/standingQuadStretch"
-                android:background="@drawable/buttons"
-                android:alpha="0.50"
-                android:textAllCaps="false"
-                android:layout_below="@+id/hipFlexor"
-                android:layout_alignLeft="@+id/linearLayout2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:checked="false"/>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
