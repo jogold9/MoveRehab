@@ -49,11 +49,11 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         //for in-app billing
-        String PublicKeyPart1 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ybgXl6LysnQgKxSE8mcyBXrc0RuCqu4mPl85xW6GIlTLmQix0q7HqQFJvmC6JDdQ5LKwQ9u3TJRG/FcN+O3Je2rQ9u1aBaOfjK7WYr2TUHXwCCwsTtVXot4wrUOFfy8ufD2X6ZKPO23GcTwUqbq2sV1CAA9/KVbmsQ9QenrmrxQeW7TzgueLyuXNKjByJbxRBvA65";
-        String PublicKeyPart2 ="BoeIgyli56UCxZTx9c9F0TDDnJSq6xvT7QZBSIlEGkChVnDzF7g2gmunhdzRej2DsApa4VBCwc7jmx2OLHKb1z2056k/KldDL57jGRRl/I+Mr9dNKa+ebLPvCNPnH3x6eptvB0JLCifqPXZwIDAQAB";
+        String PublicKey1 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMimWebquXt5TkEPfgId874JGQrfgaCR9XLawRkZEbbvEQafr75JJK1uT9uAiRAA/nDCNN6VaLxWDhr4TiEwRP6be8B0jz/0xLRWgvu940RMSfpgMAdWz5ecSp0fFXlDRWQtP9mb4/9fj/34JzjCWBhw6dx+eQDyREhDbqyVbbAwT+f9ydnkM1RflJQPAKd76YJaElgj";
+        String PublicKey2 = "StDL7GhUOX23RfzWygSaBmYu8Si/NlnPbIZxcYT55kx0DaIjQF8NmWqvUXV8MW/OHS0ICYguvlAIOPdP/HG25RCDm7VMUiIPfRi8ycyep7KmLiWNUQsl1JmI/rXNFhNqTb4r3vUd248MBwIDAQAB";
 
         // compute your public key and store it in base64EncodedPublicKey
-        mHelper = new IabHelper(this, (PublicKeyPart1 + PublicKeyPart2));
+        mHelper = new IabHelper(this, (PublicKey1 + PublicKey2));
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
