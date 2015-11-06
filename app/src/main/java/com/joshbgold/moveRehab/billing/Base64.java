@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.android.vending.billing;
+package com.joshbgold.moveRehab.billing;
 
 // This code was converted from code at http://iharder.sourceforge.net/base64/
 // Lots of extraneous features were removed.
@@ -415,7 +415,7 @@ public class Base64 {
      * @return the decoded data
      * @since 1.4
      */
-    public static byte[] decode(String s) throws com.android.vending.billing.Base64DecoderException {
+    public static byte[] decode(String s) throws Base64DecoderException {
         byte[] bytes = s.getBytes();
         return decode(bytes, 0, bytes.length);
     }
@@ -427,7 +427,7 @@ public class Base64 {
      * @param s the string to decode (decoded in default encoding)
      * @return the decoded data
      */
-    public static byte[] decodeWebSafe(String s) throws com.android.vending.billing.Base64DecoderException {
+    public static byte[] decodeWebSafe(String s) throws Base64DecoderException {
         byte[] bytes = s.getBytes();
         return decodeWebSafe(bytes, 0, bytes.length);
     }
@@ -441,7 +441,7 @@ public class Base64 {
      * @since 1.3
      * @throws Base64DecoderException
      */
-    public static byte[] decode(byte[] source) throws com.android.vending.billing.Base64DecoderException {
+    public static byte[] decode(byte[] source) throws Base64DecoderException {
         return decode(source, 0, source.length);
     }
 
@@ -472,7 +472,7 @@ public class Base64 {
      * @throws Base64DecoderException
      */
     public static byte[] decode(byte[] source, int off, int len)
-            throws com.android.vending.billing.Base64DecoderException {
+            throws Base64DecoderException {
         return decode(source, off, len, DECODABET);
     }
 
@@ -487,7 +487,7 @@ public class Base64 {
      * @return decoded data
      */
     public static byte[] decodeWebSafe(byte[] source, int off, int len)
-            throws com.android.vending.billing.Base64DecoderException {
+            throws Base64DecoderException {
         return decode(source, off, len, WEBSAFE_DECODABET);
     }
 
@@ -502,7 +502,7 @@ public class Base64 {
      * @return decoded data
      */
     public static byte[] decode(byte[] source, int off, int len, byte[] decodabet)
-            throws com.android.vending.billing.Base64DecoderException {
+            throws Base64DecoderException {
         int len34 = len * 3 / 4;
         byte[] outBuff = new byte[2 + len34]; // Upper limit on size of output
         int outBuffPosn = 0;
@@ -524,15 +524,15 @@ public class Base64 {
                         int bytesLeft = len - i;
                         byte lastByte = (byte) (source[len - 1 + off] & 0x7f);
                         if (b4Posn == 0 || b4Posn == 1) {
-                            throw new com.android.vending.billing.Base64DecoderException(
+                            throw new Base64DecoderException(
                                     "invalid padding byte '=' at byte offset " + i);
                         } else if ((b4Posn == 3 && bytesLeft > 2)
                                 || (b4Posn == 4 && bytesLeft > 1)) {
-                            throw new com.android.vending.billing.Base64DecoderException(
+                            throw new Base64DecoderException(
                                     "padding byte '=' falsely signals end of encoded value "
                                             + "at offset " + i);
                         } else if (lastByte != EQUALS_SIGN && lastByte != NEW_LINE) {
-                            throw new com.android.vending.billing.Base64DecoderException(
+                            throw new Base64DecoderException(
                                     "encoded value has invalid trailing byte");
                         }
                         break;
@@ -545,7 +545,7 @@ public class Base64 {
                     }
                 }
             } else {
-                throw new com.android.vending.billing.Base64DecoderException("Bad Base64 input character at " + i
+                throw new Base64DecoderException("Bad Base64 input character at " + i
                         + ": " + source[i + off] + "(decimal)");
             }
         }
@@ -558,7 +558,7 @@ public class Base64 {
         // padded with EQUALS_SIGN
         if (b4Posn != 0) {
             if (b4Posn == 1) {
-                throw new com.android.vending.billing.Base64DecoderException("single trailing character at offset "
+                throw new Base64DecoderException("single trailing character at offset "
                         + (len - 1));
             }
             b4[b4Posn++] = EQUALS_SIGN;

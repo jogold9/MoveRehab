@@ -12,9 +12,10 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.android.vending.billing.IabHelper;
-import com.android.vending.billing.IabResult;
 import com.joshbgold.moveRehab.R;
+import com.joshbgold.moveRehab.billing.IabHelper;
+import com.joshbgold.moveRehab.billing.IabResult;
+import com.joshbgold.moveRehab.keys.keys;
 
 
 public class SettingsActivity extends Activity {
@@ -49,8 +50,9 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         //for in-app billing
-        String PublicKey1 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMimWebquXt5TkEPfgId874JGQrfgaCR9XLawRkZEbbvEQafr75JJK1uT9uAiRAA/nDCNN6VaLxWDhr4TiEwRP6be8B0jz/0xLRWgvu940RMSfpgMAdWz5ecSp0fFXlDRWQtP9mb4/9fj/34JzjCWBhw6dx+eQDyREhDbqyVbbAwT+f9ydnkM1RflJQPAKd76YJaElgj";
-        String PublicKey2 = "StDL7GhUOX23RfzWygSaBmYu8Si/NlnPbIZxcYT55kx0DaIjQF8NmWqvUXV8MW/OHS0ICYguvlAIOPdP/HG25RCDm7VMUiIPfRi8ycyep7KmLiWNUQsl1JmI/rXNFhNqTb4r3vUd248MBwIDAQAB";
+        keys somekeys = new keys();
+        String PublicKey1 = somekeys.getPublicKey1();
+        String PublicKey2 = somekeys.getPublicKey2();
 
         // compute your public key and store it in base64EncodedPublicKey
         mHelper = new IabHelper(this, (PublicKey1 + PublicKey2));

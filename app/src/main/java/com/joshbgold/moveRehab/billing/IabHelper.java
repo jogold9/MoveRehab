@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.android.vending.billing;
+package com.joshbgold.moveRehab.billing;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -28,6 +28,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.android.vending.billing.IInAppBillingService;
 
 import org.json.JSONException;
 
@@ -320,7 +322,7 @@ public class IabHelper {
          * @param result The result of the purchase.
          * @param info The purchase information (null if purchase failed)
          */
-        void onIabPurchaseFinished(IabResult result, com.android.vending.billing.Purchase info);
+        void onIabPurchaseFinished(IabResult result, Purchase info);
     }
 
     // The listener registered on launchPurchaseFlow, which we have to call back when
@@ -468,13 +470,13 @@ public class IabHelper {
                 return true;
             }
 
-            com.android.vending.billing.Purchase purchase = null;
+            Purchase purchase = null;
             try {
-                purchase = new com.android.vending.billing.Purchase(mPurchasingItemType, purchaseData, dataSignature);
+                purchase = new Purchase(mPurchasingItemType, purchaseData, dataSignature);
                 String sku = purchase.getSku();
 
                 // Verify signature
-                if (!com.android.vending.billing.Security.verifyPurchase(mSignatureBase64, purchaseData, dataSignature)) {
+                if (!Security.verifyPurchase(mSignatureBase64, purchaseData, dataSignature)) {
                     logError("Purchase signature verification FAILED for sku " + sku);
                     result = new IabResult(IABHELPER_VERIFICATION_FAILED, "Signature verification failed for sku " + sku);
                     if (mPurchaseListener != null) mPurchaseListener.onIabPurchaseFinished(result, purchase);
@@ -516,7 +518,7 @@ public class IabHelper {
         return true;
     }
 
-    public com.android.vending.billing.Inventory queryInventory(boolean querySkuDetails, List<String> moreSkus) throws IabException {
+    public Inventory queryInventory(boolean querySkuDetails, List<String> moreSkus) throws IabException {
         return queryInventory(querySkuDetails, moreSkus, null);
     }
 
@@ -533,12 +535,12 @@ public class IabHelper {
      *     Ignored if null or if querySkuDetails is false.
      * @throws IabException if a problem occurs while refreshing the inventory.
      */
-    public com.android.vending.billing.Inventory queryInventory(boolean querySkuDetails, List<String> moreItemSkus,
+    public Inventory queryInventory(boolean querySkuDetails, List<String> moreItemSkus,
                                         List<String> moreSubsSkus) throws IabException {
         checkNotDisposed();
         checkSetupDone("queryInventory");
         try {
-            com.android.vending.billing.Inventory inv = new com.android.vending.billing.Inventory();
+            Inventory inv = new Inventory();
             int r = queryPurchases(inv, ITEM_TYPE_INAPP);
             if (r != BILLING_RESPONSE_RESULT_OK) {
                 throw new IabException(r, "Error refreshing inventory (querying owned items).");
@@ -586,7 +588,7 @@ public class IabHelper {
          * @param result The result of the operation.
          * @param inv The inventory.
          */
-        void onQueryInventoryFinished(IabResult result, com.android.vending.billing.Inventory inv);
+        void onQueryInventoryFinished(IabResult result, Inventory inv);
     }
 
 
@@ -610,7 +612,7 @@ public class IabHelper {
         (new Thread(new Runnable() {
             public void run() {
                 IabResult result = new IabResult(BILLING_RESPONSE_RESULT_OK, "Inventory refresh successful.");
-                com.android.vending.billing.Inventory inv = null;
+                Inventory inv = null;
                 try {
                     inv = queryInventory(querySkuDetails, moreSkus);
                 }
@@ -621,7 +623,7 @@ public class IabHelper {
                 flagEndAsync();
 
                 final IabResult result_f = result;
-                final com.android.vending.billing.Inventory inv_f = inv;
+                final Inventory inv_f = inv;
                 if (!mDisposed && listener != null) {
                     handler.post(new Runnable() {
                         public void run() {
@@ -651,7 +653,7 @@ public class IabHelper {
      * @param itemInfo The PurchaseInfo that represents the item to consume.
      * @throws IabException if there is a problem during consumption.
      */
-    void consume(com.android.vending.billing.Purchase itemInfo) throws IabException {
+    void consume(Purchase itemInfo) throws IabException {
         checkNotDisposed();
         checkSetupDone("consume");
 
@@ -694,7 +696,7 @@ public class IabHelper {
          * @param purchase The purchase that was (or was to be) consumed.
          * @param result The result of the consumption operation.
          */
-        void onConsumeFinished(com.android.vending.billing.Purchase purchase, IabResult result);
+        void onConsumeFinished(Purchase purchase, IabResult result);
     }
 
     /**
@@ -708,7 +710,7 @@ public class IabHelper {
          * @param results The results of each consumption operation, corresponding to each
          *     sku.
          */
-        void onConsumeMultiFinished(List<com.android.vending.billing.Purchase> purchases, List<IabResult> results);
+        void onConsumeMultiFinished(List<Purchase> purchases, List<IabResult> results);
     }
 
     /**
@@ -719,10 +721,10 @@ public class IabHelper {
      * @param purchase The purchase to be consumed.
      * @param listener The listener to notify when the consumption operation finishes.
      */
-    public void consumeAsync(com.android.vending.billing.Purchase purchase, OnConsumeFinishedListener listener) {
+    public void consumeAsync(Purchase purchase, OnConsumeFinishedListener listener) {
         checkNotDisposed();
         checkSetupDone("consume");
-        List<com.android.vending.billing.Purchase> purchases = new ArrayList<>();
+        List<Purchase> purchases = new ArrayList<>();
         purchases.add(purchase);
         consumeAsyncInternal(purchases, listener, null);
     }
@@ -732,7 +734,7 @@ public class IabHelper {
      * @param purchases The list of PurchaseInfo objects representing the purchases to consume.
      * @param listener The listener to notify when the consumption operation finishes.
      */
-    public void consumeAsync(List<com.android.vending.billing.Purchase> purchases, OnConsumeMultiFinishedListener listener) {
+    public void consumeAsync(List<Purchase> purchases, OnConsumeMultiFinishedListener listener) {
         checkNotDisposed();
         checkSetupDone("consume");
         consumeAsyncInternal(purchases, null, listener);
@@ -828,7 +830,7 @@ public class IabHelper {
     }
 
 
-    int queryPurchases(com.android.vending.billing.Inventory inv, String itemType) throws JSONException, RemoteException {
+    int queryPurchases(Inventory inv, String itemType) throws JSONException, RemoteException {
         // Query purchases
         logDebug("Querying owned items, item type: " + itemType);
         logDebug("Package name: " + mContext.getPackageName());
@@ -864,9 +866,9 @@ public class IabHelper {
                 String purchaseData = purchaseDataList.get(i);
                 String signature = signatureList.get(i);
                 String sku = ownedSkus.get(i);
-                if (com.android.vending.billing.Security.verifyPurchase(mSignatureBase64, purchaseData, signature)) {
+                if (Security.verifyPurchase(mSignatureBase64, purchaseData, signature)) {
                     logDebug("Sku is owned: " + sku);
-                    com.android.vending.billing.Purchase purchase = new com.android.vending.billing.Purchase(itemType, purchaseData, signature);
+                    Purchase purchase = new Purchase(itemType, purchaseData, signature);
 
                     if (TextUtils.isEmpty(purchase.getToken())) {
                         logWarn("BUG: empty/null token!");
@@ -891,7 +893,7 @@ public class IabHelper {
         return verificationFailed ? IABHELPER_VERIFICATION_FAILED : BILLING_RESPONSE_RESULT_OK;
     }
 
-    int querySkuDetails(String itemType, com.android.vending.billing.Inventory inv, List<String> moreSkus)
+    int querySkuDetails(String itemType, Inventory inv, List<String> moreSkus)
                                 throws RemoteException, JSONException {
         logDebug("Querying SKU details.");
         ArrayList<String> skuList = new ArrayList<>();
@@ -930,7 +932,7 @@ public class IabHelper {
                 RESPONSE_GET_SKU_DETAILS_LIST);
 
         for (String thisResponse : responseList) {
-            com.android.vending.billing.SkuDetails d = new com.android.vending.billing.SkuDetails(itemType, thisResponse);
+            SkuDetails d = new SkuDetails(itemType, thisResponse);
             logDebug("Got sku details: " + d);
             inv.addSkuDetails(d);
         }
@@ -938,7 +940,7 @@ public class IabHelper {
     }
 
 
-    void consumeAsyncInternal(final List<com.android.vending.billing.Purchase> purchases,
+    void consumeAsyncInternal(final List<Purchase> purchases,
                               final OnConsumeFinishedListener singleListener,
                               final OnConsumeMultiFinishedListener multiListener) {
         final Handler handler = new Handler();
@@ -946,7 +948,7 @@ public class IabHelper {
         (new Thread(new Runnable() {
             public void run() {
                 final List<IabResult> results = new ArrayList<>();
-                for (com.android.vending.billing.Purchase purchase : purchases) {
+                for (Purchase purchase : purchases) {
                     try {
                         consume(purchase);
                         results.add(new IabResult(BILLING_RESPONSE_RESULT_OK, "Successful consume of sku " + purchase.getSku()));

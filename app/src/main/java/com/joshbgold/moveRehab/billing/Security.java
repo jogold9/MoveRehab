@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.android.vending.billing;
+package com.joshbgold.moveRehab.billing;
 
 import android.text.TextUtils;
 import android.util.Log;

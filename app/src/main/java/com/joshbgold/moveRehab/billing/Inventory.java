@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.android.vending.billing;
+package com.joshbgold.moveRehab.billing;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.android.vending.billing;
+package com.joshbgold.moveRehab.billing;
 
 /**
  * Exception thrown when something went wrong with in-app billing.
@@ -22,22 +22,22 @@ package com.android.vending.billing;
  * call {@link #getResult()}.
  */
 public class IabException extends Exception {
-    com.android.vending.billing.IabResult mResult;
+    IabResult mResult;
 
-    public IabException(com.android.vending.billing.IabResult r) {
+    public IabException(IabResult r) {
         this(r, null);
     }
     public IabException(int response, String message) {
-        this(new com.android.vending.billing.IabResult(response, message));
+        this(new IabResult(response, message));
     }
-    public IabException(com.android.vending.billing.IabResult r, Exception cause) {
+    public IabException(IabResult r, Exception cause) {
         super(r.getMessage(), cause);
         mResult = r;
     }
     public IabException(int response, String message, Exception cause) {
-        this(new com.android.vending.billing.IabResult(response, message), cause);
+        this(new IabResult(response, message), cause);
     }
 
     /** Returns the IAB result (error) that this exception signals. */
-    public com.android.vending.billing.IabResult getResult() { return mResult; }
+    public IabResult getResult() { return mResult; }
 }
