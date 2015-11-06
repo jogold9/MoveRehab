@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.android.vending.billing.IabHelper;
+import com.android.vending.billing.IabResult;
 import com.joshbgold.moveRehab.R;
 
 
@@ -36,10 +39,31 @@ public class SettingsActivity extends Activity {
     private boolean hipFlexor = false;
     private boolean quadStretch = false;
 
+
+    //for in-app billing (IAB). See developer.android.com/training/in-app-billing/preparing-iab-app.html#Connect
+    IabHelper mHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        //for in-app billing
+        String PublicKeyPart1 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ybgXl6LysnQgKxSE8mcyBXrc0RuCqu4mPl85xW6GIlTLmQix0q7HqQFJvmC6JDdQ5LKwQ9u3TJRG/FcN+O3Je2rQ9u1aBaOfjK7WYr2TUHXwCCwsTtVXot4wrUOFfy8ufD2X6ZKPO23GcTwUqbq2sV1CAA9/KVbmsQ9QenrmrxQeW7TzgueLyuXNKjByJbxRBvA65";
+        String PublicKeyPart2 ="BoeIgyli56UCxZTx9c9F0TDDnJSq6xvT7QZBSIlEGkChVnDzF7g2gmunhdzRej2DsApa4VBCwc7jmx2OLHKb1z2056k/KldDL57jGRRl/I+Mr9dNKa+ebLPvCNPnH3x6eptvB0JLCifqPXZwIDAQAB";
+
+        // compute your public key and store it in base64EncodedPublicKey
+        mHelper = new IabHelper(this, (PublicKeyPart1 + PublicKeyPart2));
+
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            public void onIabSetupFinished(IabResult result) {
+                if (!result.isSuccess()) {
+                    // Oh noes, there was a problem.
+                    Log.d("In-App Billing Error", "Unfortunately there was a problem setting up In-app Billing: " + result);
+                }
+                // Hooray, IAB is fully set up!
+            }
+        });
 
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
         final Button backButton = (Button) findViewById(R.id.backButton);
@@ -58,11 +82,8 @@ public class SettingsActivity extends Activity {
         final CheckBox figure4CheckBox = (CheckBox)findViewById(R.id.figure4);
         final CheckBox hipFlexorCheckBox = (CheckBox)findViewById(R.id.hipFlexor);
         final CheckBox quadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
+        final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
 
-        volumeControl = (SeekBar) findViewById(R.id.volumeSeekBar);
-
-        volume = loadPrefs("volumeKey", volume);
-        volumeControl.setProgress((int) (volume * 100));
         repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
         blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
         blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
@@ -79,7 +100,9 @@ public class SettingsActivity extends Activity {
         figure4 = loadPrefs("figure4", figure4);
         hipFlexor = loadPrefs("hipFlexor", hipFlexor);
         quadStretch = loadPrefs("quadStretch", quadStretch);
+        volume = loadPrefs("volumeKey", volume);
 
+        volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
 
         if (blockWeekendAlarms) {
@@ -179,11 +202,9 @@ public class SettingsActivity extends Activity {
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-
                 volume = (float) (((double) (progressChanged)) / 100);  //allows division w/ decimal results instead of integer results
                 savePrefs("volumeKey", volume);
                 Toast.makeText(SettingsActivity.this, "Audio volume is set to: " + progressChanged + " %", Toast.LENGTH_SHORT).show();
@@ -306,7 +327,6 @@ public class SettingsActivity extends Activity {
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
                 try {
-
                     if (repeatIntervalAsString.equals("")){
                         repeatIntervalInHours = 0;
                         savePrefs("repeatIntervalKey", repeatIntervalInHours);
@@ -324,7 +344,6 @@ public class SettingsActivity extends Activity {
                             finish();
                         }
                     }
-
                 } catch (NumberFormatException exception) {
                     Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24 for the repeat interval, or leave blank for a " +
                             "one-time alarm.", Toast
@@ -374,4 +393,12 @@ public class SettingsActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mHelper != null) mHelper.dispose();
+        mHelper = null;
+    }
 }
+
