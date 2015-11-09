@@ -27,9 +27,11 @@ public class Moves extends Activity {
     public boolean scapRetraction = false;
     public boolean squats = false;
     public boolean walk = false;
+    public String customReminder ="";
 
     public Moves() {
 
+        customReminder = loadPrefs("customReminder", customReminder);
         adductor = loadPrefs("adductor", adductor);
         backbends = loadPrefs("backbends", backbends);
         chestStretch = loadPrefs("chestStretch", chestStretch);
@@ -48,6 +50,9 @@ public class Moves extends Activity {
     public StringBuilder getMoves(){
         StringBuilder movements = new StringBuilder();
 
+        if(customReminder != null && !customReminder.isEmpty()){
+            movementsArrayList.add(customReminder);
+        }
         if(adductor){
             movementsArrayList.add("adductor");
         }
@@ -111,5 +116,9 @@ public class Moves extends Activity {
     private boolean loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = mAppContext.getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
+    }
+    private String loadPrefs(String key,String value) {
+        SharedPreferences sharedPreferences = mAppContext.getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, value);
     }
 }

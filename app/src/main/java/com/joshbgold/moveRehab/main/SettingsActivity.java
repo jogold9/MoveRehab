@@ -23,6 +23,7 @@ public class SettingsActivity extends Activity {
     private SeekBar volumeControl = null;
     private float volume = (float) 0.50;
     private String repeatIntervalAsString = "";
+    private String customReminderString = "";
     private int repeatIntervalInHours = 0;  //Number of hours that user wants alarm to repeat at (optional)
     private boolean blockWeekendAlarms = false;
     private boolean blockNonWorkHoursAlarms = false;
@@ -68,6 +69,7 @@ public class SettingsActivity extends Activity {
         });
 
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
+        final EditText CustomReminderEditText = (EditText) findViewById(R.id.AddYourOwn);
         final Button backButton = (Button) findViewById(R.id.backButton);
         final CheckBox blockWeekendsCheckBox = (CheckBox)findViewById(R.id.blockWeekends);
         final CheckBox blockNonWorkHoursCheckBox = (CheckBox)findViewById(R.id.blockNonWorkDayHours);
@@ -87,6 +89,7 @@ public class SettingsActivity extends Activity {
         final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
 
         repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
+        customReminderString = loadPrefs("customReminder", customReminderString);
         blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
         blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
         neckRetraction = loadPrefs("neckRetraction", neckRetraction);
@@ -326,7 +329,11 @@ public class SettingsActivity extends Activity {
                 hipFlexor = loadPrefs("hipFlexor", hipFlexor);
                 quadStretch = loadPrefs("quadStretch", quadStretch);
 
+                customReminderString = CustomReminderEditText.getText() + "";
+
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
+
+               savePrefs("customReminder", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){
@@ -380,6 +387,13 @@ public class SettingsActivity extends Activity {
         editor.commit();
     }
 
+    public void savePrefs(String key, String value){
+        SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
     //get prefs
     private float loadPrefs(String key,float value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
@@ -394,6 +408,11 @@ public class SettingsActivity extends Activity {
     private boolean loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
+    }
+
+    private String loadPrefs(String key,String value) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, value);
     }
 
     @Override
