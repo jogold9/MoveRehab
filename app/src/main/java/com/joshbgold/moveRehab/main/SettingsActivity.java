@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,8 +13,6 @@ import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.billing.IabHelper;
-import com.joshbgold.moveRehab.billing.IabResult;
-import com.joshbgold.moveRehab.keys.keys;
 
 
 public class SettingsActivity extends Activity {
@@ -50,8 +47,8 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //for in-app billing
-        keys somekeys = new keys();
+        //for in-app billing... key class got accidentally deleted via Github merge
+       /* keys somekeys = new keys();
         String PublicKey1 = somekeys.getPublicKey1();
         String PublicKey2 = somekeys.getPublicKey2();
 
@@ -66,7 +63,7 @@ public class SettingsActivity extends Activity {
                 }
                 // Hooray, IAB is fully set up!
             }
-        });
+        });*/
 
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
         final EditText CustomReminderEditText = (EditText) findViewById(R.id.AddYourOwn);
@@ -109,6 +106,10 @@ public class SettingsActivity extends Activity {
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
+
+        if(customReminderString != null && !customReminderString.isEmpty()) {
+            CustomReminderEditText.setText(customReminderString);
+        }
 
         if (blockWeekendAlarms) {
             blockWeekendsCheckBox.setChecked(true);
