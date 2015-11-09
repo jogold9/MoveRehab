@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.widget.ToggleButton;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.backend.AlarmReceiver;
+import com.joshbgold.moveRehab.backend.Prefs;
 
 import java.util.Calendar;
 
@@ -43,6 +43,7 @@ public class AlarmActivity extends Activity {
     private String minuteSetString = "";
     private String amPmlabel = "";
     private MediaPlayer mediaPlayer = null;  //plays an mp3 file
+    Prefs prefs = new Prefs();
 
 
     public AlarmActivity() {
@@ -142,7 +143,7 @@ public class AlarmActivity extends Activity {
             Intent myIntent = new Intent(AlarmActivity.this, AlarmReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(AlarmActivity.this, 0, myIntent, 0);
 
-            repeatIntervalHours = LoadPreferences("repeatIntervalKey", repeatIntervalHours);  //gets number of hours reminder should repeat
+            repeatIntervalHours = prefs.loadPrefs("repeatIntervalKey", repeatIntervalHours);  //gets number of hours reminder should repeat
 
             repeatIntervalMilliseconds = repeatIntervalHours * 1000 * 60 * 60;  //converts to milliseconds units that setRepeating method requires
 
@@ -199,12 +200,12 @@ public class AlarmActivity extends Activity {
         startActivity(intent);
     }
 
-    //get prefs
+/*    //get prefs
     private int LoadPreferences(String key, int value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         return sharedPreferences.getInt(key, value);
-    }
+    }*/
 
     private void turnOffAudio(){
         if (mediaPlayer != null) try {

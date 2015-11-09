@@ -1,9 +1,8 @@
 package com.joshbgold.moveRehab.main;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,7 +11,9 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
+import com.joshbgold.moveRehab.backend.Prefs;
 import com.joshbgold.moveRehab.billing.IabHelper;
+import com.joshbgold.moveRehab.billing.IabResult;
 
 
 public class SettingsActivity extends Activity {
@@ -37,8 +38,8 @@ public class SettingsActivity extends Activity {
     private boolean figure4 = false;
     private boolean hipFlexor = false;
     private boolean quadStretch = false;
-
-
+    Prefs prefs = new Prefs();
+    
     //for in-app billing (IAB). See developer.android.com/training/in-app-billing/preparing-iab-app.html#Connect
     IabHelper mHelper;
 
@@ -47,13 +48,11 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //for in-app billing... key class got accidentally deleted via Github merge
-       /* keys somekeys = new keys();
-        String PublicKey1 = somekeys.getPublicKey1();
-        String PublicKey2 = somekeys.getPublicKey2();
+        //for in-app billing... I had this in key stored in separate class but accidentally deleted in Github merge
+        String PublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMimWebquXt5TkEPfgId874JGQrfgaCR9XLawRkZEbbvEQafr75JJK1uT9uAiRAA/nDCNN6VaLxWDhr4TiEwRP6be8B0jz/0xLRWgvu940RMSfpgMAdWz5ecSp0fFXlDRWQtP9mb4/9fj/34JzjCWBhw6dx+eQDyREhDbqyVbbAwT+f9ydnkM1RflJQPAKd76YJaElgjStDL7GhUOX23RfzWygSaBmYu8Si/NlnPbIZxcYT55kx0DaIjQF8NmWqvUXV8MW/OHS0ICYguvlAIOPdP/HG25RCDm7VMUiIPfRi8ycyep7KmLiWNUQsl1JmI/rXNFhNqTb4r3vUd248MBwIDAQAB";
 
         // compute your public key and store it in base64EncodedPublicKey
-        mHelper = new IabHelper(this, (PublicKey1 + PublicKey2));
+        mHelper = new IabHelper(this, (PublicKey));
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
@@ -63,7 +62,7 @@ public class SettingsActivity extends Activity {
                 }
                 // Hooray, IAB is fully set up!
             }
-        });*/
+        });
 
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
         final EditText CustomReminderEditText = (EditText) findViewById(R.id.AddYourOwn);
@@ -85,24 +84,24 @@ public class SettingsActivity extends Activity {
         final CheckBox quadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
         final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
 
-        repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
-        customReminderString = loadPrefs("customReminder", customReminderString);
-        blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
-        blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-        neckExtension = loadPrefs("neckExtension", neckExtension);
-        scapRetraction = loadPrefs("scapRetraction", scapRetraction);
-        chestStretch = loadPrefs("chestStretch", chestStretch);
-        ceilingReach = loadPrefs("ceilingReach", ceilingReach);
-        walk = loadPrefs("walk", walk);
-        squats = loadPrefs("squats", squats);
-        backbends = loadPrefs("backbends", backbends);
-        hamstrings = loadPrefs("hamstrings", hamstrings);
-        adductor = loadPrefs("adductor", adductor);
-        figure4 = loadPrefs("figure4", figure4);
-        hipFlexor = loadPrefs("hipFlexor", hipFlexor);
-        quadStretch = loadPrefs("quadStretch", quadStretch);
-        volume = loadPrefs("volumeKey", volume);
+        repeatIntervalInHours = prefs.loadPrefs("repeatIntervalKey", repeatIntervalInHours);
+        customReminderString = prefs.loadPrefs("customReminder", customReminderString);
+        blockWeekendAlarms = prefs.loadPrefs("noWeekendsKey", blockWeekendAlarms);
+        blockNonWorkHoursAlarms = prefs.loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+        neckRetraction = prefs.loadPrefs("neckRetraction", neckRetraction);
+        neckExtension = prefs.loadPrefs("neckExtension", neckExtension);
+        scapRetraction = prefs.loadPrefs("scapRetraction", scapRetraction);
+        chestStretch = prefs.loadPrefs("chestStretch", chestStretch);
+        ceilingReach = prefs.loadPrefs("ceilingReach", ceilingReach);
+        walk = prefs.loadPrefs("walk", walk);
+        squats = prefs.loadPrefs("squats", squats);
+        backbends = prefs.loadPrefs("backbends", backbends);
+        hamstrings = prefs.loadPrefs("hamstrings", hamstrings);
+        adductor = prefs.loadPrefs("adductor", adductor);
+        figure4 = prefs.loadPrefs("figure4", figure4);
+        hipFlexor = prefs.loadPrefs("hipFlexor", hipFlexor);
+        quadStretch = prefs.loadPrefs("quadStretch", quadStretch);
+        volume = prefs.loadPrefs("volumeKey", volume);
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
@@ -212,7 +211,7 @@ public class SettingsActivity extends Activity {
 
             public void onStopTrackingTouch(SeekBar seekBar) {
                 volume = (float) (((double) (progressChanged)) / 100);  //allows division w/ decimal results instead of integer results
-                savePrefs("volumeKey", volume);
+                prefs.savePrefs("volumeKey", volume);
                 Toast.makeText(SettingsActivity.this, "Audio volume is set to: " + progressChanged + " %", Toast.LENGTH_SHORT).show();
             }
         });
@@ -222,124 +221,124 @@ public class SettingsActivity extends Activity {
             public void onClick(View view) {
 
                 //The following code saves user preferences
-                savePrefs("volumeKey", volume);
+                prefs.savePrefs("volumeKey", volume);
 
                 if (blockWeekendsCheckBox.isChecked()){
-                    savePrefs("noWeekendsKey", true);
+                    prefs.savePrefs("noWeekendsKey", true);
                 } else{
-                    savePrefs("noWeekendsKey", false);
+                    prefs.savePrefs("noWeekendsKey", false);
                 }
 
                 if (blockNonWorkHoursCheckBox.isChecked()){
-                    savePrefs("workHoursOnlyKey", true);
+                    prefs.savePrefs("workHoursOnlyKey", true);
                 } else {
-                    savePrefs("workHoursOnlyKey", false);
+                    prefs.savePrefs("workHoursOnlyKey", false);
                 }
 
                 if (neckRetractionCheckBox.isChecked()){
-                    savePrefs("neckRetraction", true);
+                    prefs.savePrefs("neckRetraction", true);
                 } else {
-                    savePrefs("neckRetraction", false);
+                    prefs.savePrefs("neckRetraction", false);
                 }
 
                 if (neckExtensionCheckbox.isChecked()){
-                    savePrefs("neckExtension", true);
+                    prefs.savePrefs("neckExtension", true);
                 } else {
-                    savePrefs("neckExtension", false);
+                    prefs.savePrefs("neckExtension", false);
                 }
 
                 if (scapRetractionCheckBox.isChecked()){
-                    savePrefs("scapRetraction", true);
+                    prefs.savePrefs("scapRetraction", true);
                 } else {
-                    savePrefs("scapRetraction", false);
+                    prefs.savePrefs("scapRetraction", false);
                 }
 
                 if (chestStretchCheckBox.isChecked()) {
-                    savePrefs("chestStretch", true);
+                    prefs.savePrefs("chestStretch", true);
                 } else {
-                    savePrefs("chestStretch", false);
+                    prefs.savePrefs("chestStretch", false);
                 }
 
                 if (ceilingReachCheckbox.isChecked()) {
-                    savePrefs("ceilingReach", true);
+                    prefs.savePrefs("ceilingReach", true);
                 } else {
-                    savePrefs("ceilingReach", false);
+                    prefs.savePrefs("ceilingReach", false);
                 }
 
                 if (WalkCheckBox.isChecked()){
-                    savePrefs("walk", true);
+                    prefs.savePrefs("walk", true);
                 } else {
-                    savePrefs("walk", false);
+                    prefs.savePrefs("walk", false);
                 }
 
                 if (SquatsCheckBox.isChecked()){
-                    savePrefs("squats", true);
+                    prefs.savePrefs("squats", true);
                 } else {
-                    savePrefs("squats", false);
+                    prefs.savePrefs("squats", false);
                 }
 
                 if (BackBendsCheckBox.isChecked()){
-                    savePrefs("backbends", true);
+                    prefs.savePrefs("backbends", true);
                 } else {
-                    savePrefs("backbends", false);
+                    prefs.savePrefs("backbends", false);
                 }
 
                 if(HamstringsCheckBox.isChecked()){
-                    savePrefs("hamstrings", true);
+                    prefs.savePrefs("hamstrings", true);
                 } else {
-                    savePrefs("hamstrings", false);
+                    prefs.savePrefs("hamstrings", false);
                 }
 
                 if(adductorCheckBox.isChecked()){
-                    savePrefs("adductor", true);
+                    prefs.savePrefs("adductor", true);
                 } else {
-                    savePrefs("adductor", false);
+                    prefs.savePrefs("adductor", false);
                 }
 
                 if(figure4CheckBox.isChecked()){
-                    savePrefs("figure4", true);
+                    prefs.savePrefs("figure4", true);
                 } else {
-                    savePrefs("figure4", false);
+                    prefs.savePrefs("figure4", false);
                 }
 
                 if(hipFlexorCheckBox.isChecked()){
-                    savePrefs("hipFlexor", true);
+                    prefs.savePrefs("hipFlexor", true);
                 } else {
-                    savePrefs("hipFlexor", false);
+                    prefs.savePrefs("hipFlexor", false);
                 }
 
                 if(quadStretchCheckBox.isChecked()){
-                    savePrefs("quadStretch", true);
+                    prefs.savePrefs("quadStretch", true);
                 } else {
-                    savePrefs("quadStretch", false);
+                    prefs.savePrefs("quadStretch", false);
                 }
 
-                blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
-                blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-                neckRetraction = loadPrefs("neckRetraction", neckRetraction);
-                neckExtension = loadPrefs("neckExtension", neckExtension);
-                scapRetraction = loadPrefs("scapRetraction", scapRetraction);
-                chestStretch = loadPrefs("chestStretch", chestStretch);
-                ceilingReach = loadPrefs("ceilingReach", ceilingReach);
-                walk = loadPrefs("walk", walk);
-                squats = loadPrefs("squats", squats);
-                backbends = loadPrefs("backbends", backbends);
-                hamstrings = loadPrefs("hamstrings", hamstrings);
-                adductor = loadPrefs("adductor", adductor);
-                figure4 = loadPrefs("figure4", figure4);
-                hipFlexor = loadPrefs("hipFlexor", hipFlexor);
-                quadStretch = loadPrefs("quadStretch", quadStretch);
+                blockWeekendAlarms = prefs.loadPrefs("noWeekendsKey", blockWeekendAlarms);
+                blockNonWorkHoursAlarms = prefs.loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+                neckRetraction = prefs.loadPrefs("neckRetraction", neckRetraction);
+                neckExtension = prefs.loadPrefs("neckExtension", neckExtension);
+                scapRetraction = prefs.loadPrefs("scapRetraction", scapRetraction);
+                chestStretch = prefs.loadPrefs("chestStretch", chestStretch);
+                ceilingReach = prefs.loadPrefs("ceilingReach", ceilingReach);
+                walk = prefs.loadPrefs("walk", walk);
+                squats = prefs.loadPrefs("squats", squats);
+                backbends = prefs.loadPrefs("backbends", backbends);
+                hamstrings = prefs.loadPrefs("hamstrings", hamstrings);
+                adductor = prefs.loadPrefs("adductor", adductor);
+                figure4 = prefs.loadPrefs("figure4", figure4);
+                hipFlexor = prefs.loadPrefs("hipFlexor", hipFlexor);
+                quadStretch = prefs.loadPrefs("quadStretch", quadStretch);
 
                 customReminderString = CustomReminderEditText.getText() + "";
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
-               savePrefs("customReminder", customReminderString);
+               prefs.savePrefs("customReminder", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){
                         repeatIntervalInHours = 0;
-                        savePrefs("repeatIntervalKey", repeatIntervalInHours);
+                        prefs.savePrefs("repeatIntervalKey", repeatIntervalInHours);
                         finish();
                     }
                     else {
@@ -350,7 +349,7 @@ public class SettingsActivity extends Activity {
                                     Toast.LENGTH_LONG).show();
                         } else {
                             repeatIntervalInHours = Integer.valueOf(repeatIntervalAsString);
-                            savePrefs("repeatIntervalKey", repeatIntervalInHours);
+                            prefs.savePrefs("repeatIntervalKey", repeatIntervalInHours);
                             finish();
                         }
                     }
@@ -365,8 +364,8 @@ public class SettingsActivity extends Activity {
 
     }
 
-    //save prefs
-    public void savePrefs(String key, float value){
+/*    //save prefs
+    public void prefs.savePrefs(String key, float value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -374,47 +373,47 @@ public class SettingsActivity extends Activity {
         editor.commit();
     }
 
-    public void savePrefs(String key, int value){
+    public void prefs.savePrefs(String key, int value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
         editor.commit();
     }
 
-    public void savePrefs(String key, boolean value){
+    public void prefs.savePrefs(String key, boolean value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
         editor.commit();
     }
 
-    public void savePrefs(String key, String value){
+    public void prefs.savePrefs(String key, String value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.commit();
-    }
+    }*/
 
-    //get prefs
-    private float loadPrefs(String key,float value) {
+/*    //get prefs
+    private float prefs.loadPrefs(String key,float value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
          return sharedPreferences.getFloat(key, value);
     }
 
-    private int loadPrefs(String key,int value) {
+    private int prefs.loadPrefs(String key,int value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getInt(key, value);
     }
 
-    private boolean loadPrefs(String key,boolean value) {
+    private boolean prefs.loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
     }
 
-    private String loadPrefs(String key,String value) {
+    private String prefs.loadPrefs(String key,String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, value);
-    }
+    }*/
 
     @Override
     public void onDestroy() {

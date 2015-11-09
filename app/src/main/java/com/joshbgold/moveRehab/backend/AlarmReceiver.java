@@ -2,13 +2,13 @@ package com.joshbgold.moveRehab.backend;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 import java.util.Calendar;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
+    Prefs prefs = new Prefs();
 
  /*  sharedPreferences not pulling the same default preferences yet, I think the context has something to do with it. May need to learn how to
     using a specific named sharedPreferences file instead of using the default sharedPreferences file
@@ -41,9 +41,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         boolean isWeekend = (today == Calendar.SUNDAY) || (today == Calendar.SATURDAY);
         boolean isOutsideWorkHours = (currentHour < 9) || (currentHour > 16);
 
-        workHoursOnly = loadPrefs("workHoursOnlyKey", workHoursOnly);
+        workHoursOnly = prefs.loadPrefs("workHoursOnlyKey", workHoursOnly);
 
-        noWeekends = loadPrefs("noWeekendsKey", noWeekends);
+        noWeekends = prefs.loadPrefs("noWeekendsKey", noWeekends);
 
         if(isWeekend && noWeekends) {
             try {
@@ -72,9 +72,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     }
 
-    //get prefs
+/*    //get prefs
     private boolean loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = onReceiveContext.getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
-    }
+    }*/
 }

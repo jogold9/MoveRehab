@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.backend.AlarmReceiver;
+import com.joshbgold.moveRehab.backend.Prefs;
 import com.joshbgold.moveRehab.content.Moves;
 
 
@@ -27,6 +27,7 @@ public class ReminderActivity extends Activity {
     private StringBuilder movesString = new StringBuilder();
     private static PendingIntent pendingIntent;
     private float volume = (float) 0.5;
+    Prefs prefs = new Prefs();
     //Context context = getApplicationContext();
 
     @Override
@@ -55,7 +56,7 @@ public class ReminderActivity extends Activity {
             }
         });
 
-        volume = loadPreferences("volumeKey", volume); //gets the current volume
+        volume = prefs.loadPrefs("volumeKey", volume); //gets the current volume
 
         mediaPlayer.setVolume(volume, volume); //sets right speaker volume and left speaker volume for mediaPlayer
         mediaPlayer.start();
@@ -110,9 +111,9 @@ public class ReminderActivity extends Activity {
         exitButton.setOnClickListener(quitApp);
     }
 
-    //get prefs
+/*    //get prefs
     private float loadPreferences(String key, float value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getFloat(key, value);
-    }
+    }*/
 }
