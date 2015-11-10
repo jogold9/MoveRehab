@@ -2,6 +2,7 @@ package com.joshbgold.moveRehab.main;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +14,10 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
+import com.joshbgold.moveRehab.backend.UniqueID;
 import com.joshbgold.moveRehab.billing.IabHelper;
 import com.joshbgold.moveRehab.billing.IabResult;
+import com.joshbgold.moveRehab.billing.Purchase;
 
 
 public class SettingsActivity extends Activity {
@@ -39,8 +42,12 @@ public class SettingsActivity extends Activity {
     private boolean figure4 = false;
     private boolean hipFlexor = false;
     private boolean quadStretch = false;
-    
+
     //for in-app billing (IAB). See developer.android.com/training/in-app-billing/preparing-iab-app.html#Connect
+    private boolean hasPurchasedCustomReminders = false;
+    private String MACAddress = "";
+    private String productID = "custom_reminders";  //product ID for premium custom reminders feature
+    private int requestCode = 10001;
     IabHelper mHelper;
 
     @Override
@@ -102,6 +109,7 @@ public class SettingsActivity extends Activity {
         hipFlexor = loadPrefs("hipFlexor", hipFlexor);
         quadStretch = loadPrefs("quadStretch", quadStretch);
         volume = loadPrefs("volumeKey", volume);
+        hasPurchasedCustomReminders = loadPrefs("premium", hasPurchasedCustomReminders);
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
@@ -213,6 +221,20 @@ public class SettingsActivity extends Activity {
                 volume = (float) (((double) (progressChanged)) / 100);  //allows division w/ decimal results instead of integer results
                 savePrefs("volumeKey", volume);
                 Toast.makeText(SettingsActivity.this, "Audio volume is set to: " + progressChanged + " %", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //if user click custom reminder EditText, first take care of in-app billing for this feature
+        CustomReminderEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!hasPurchasedCustomReminders){
+                    MACAddress = UniqueID.getMACAddress("wlan0");
+                    mHelper.launchPurchaseFlow(SettingsActivity.this, productID, requestCode, mPurchaseFinishedListener, MACAddress);
+                }
+                else{ //user has already purchased custom reminders
+                    customReminderString = CustomReminderEditText.getText() + "";
+                }
             }
         });
 
@@ -328,8 +350,7 @@ public class SettingsActivity extends Activity {
                 figure4 = loadPrefs("figure4", figure4);
                 hipFlexor = loadPrefs("hipFlexor", hipFlexor);
                 quadStretch = loadPrefs("quadStretch", quadStretch);
-
-                customReminderString = CustomReminderEditText.getText() + "";
+                hasPurchasedCustomReminders = loadPrefs("premium", hasPurchasedCustomReminders);
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
@@ -421,5 +442,38 @@ public class SettingsActivity extends Activity {
         if (mHelper != null) mHelper.dispose();
         mHelper = null;
     }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+        Log.d("Uh oh!", "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+
+        // Pass on the activity result to the helper for handling
+        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+            // not handled, so handle it ourselves (here's where you'd
+            // perform any handling of activity results not related to in-app
+            // billing...
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+        else {
+            Log.d("Uh oh!", "onActivityResult handled by IABUtil.");
+        }
+    }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
+            = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase)
+        {
+            if (result.isFailure()) {
+                Log.d("Oh noes!", "Error purchasing: " + result);
+                return;
+            }
+
+            else if (purchase.getSku().equals(productID)) {
+                // give user access to premium content and update the UI
+                hasPurchasedCustomReminders = true;
+                savePrefs("premium", hasPurchasedCustomReminders);
+            }
+        }
+    };
 }
 

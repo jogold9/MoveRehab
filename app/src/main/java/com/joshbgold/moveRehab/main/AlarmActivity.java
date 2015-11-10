@@ -35,6 +35,7 @@ public class AlarmActivity extends Activity {
     int repeatIntervalMilliseconds = 0;
     private int hourSet = 0;
     private int minuteSet = 0;
+    private boolean hasPurchasedCustomReminders = false;
 
     //http://developer.android.com/reference/java/util/Calendar.html#compareTo(java.util.Calendar)
     //0 if the times of the two Calendars are equal, -1 if the time of this Calendar is before the other one, 1 if the time of this Calendar is after the other one.
@@ -61,6 +62,9 @@ public class AlarmActivity extends Activity {
         AlarmActivity.context = getApplicationContext();  //needed to be able to cancel alarm from another activity
 
         playAudio();
+
+        queryGoogleForPurchases(); //checks if user has purchased premium features, save result to boolean
+        savePrefs("premium", hasPurchasedCustomReminders);
 
         View.OnClickListener goToSettings = new View.OnClickListener(){
             @Override
@@ -203,6 +207,14 @@ public class AlarmActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         return sharedPreferences.getInt(key, value);
+    }
+
+    //save prefs
+    public void savePrefs(String key, boolean value){
+        SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
     }
 
     private void turnOffAudio(){
