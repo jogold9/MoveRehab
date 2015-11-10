@@ -1,6 +1,8 @@
 package com.joshbgold.moveRehab.main;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +13,6 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
-import com.joshbgold.moveRehab.backend.Prefs;
 import com.joshbgold.moveRehab.billing.IabHelper;
 import com.joshbgold.moveRehab.billing.IabResult;
 
@@ -38,7 +39,6 @@ public class SettingsActivity extends Activity {
     private boolean figure4 = false;
     private boolean hipFlexor = false;
     private boolean quadStretch = false;
-    Prefs prefs = new Prefs();
     
     //for in-app billing (IAB). See developer.android.com/training/in-app-billing/preparing-iab-app.html#Connect
     IabHelper mHelper;
@@ -84,24 +84,24 @@ public class SettingsActivity extends Activity {
         final CheckBox quadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
         final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
 
-        repeatIntervalInHours = prefs.loadPrefs("repeatIntervalKey", repeatIntervalInHours);
-        customReminderString = prefs.loadPrefs("customReminder", customReminderString);
-        blockWeekendAlarms = prefs.loadPrefs("noWeekendsKey", blockWeekendAlarms);
-        blockNonWorkHoursAlarms = prefs.loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-        neckRetraction = prefs.loadPrefs("neckRetraction", neckRetraction);
-        neckExtension = prefs.loadPrefs("neckExtension", neckExtension);
-        scapRetraction = prefs.loadPrefs("scapRetraction", scapRetraction);
-        chestStretch = prefs.loadPrefs("chestStretch", chestStretch);
-        ceilingReach = prefs.loadPrefs("ceilingReach", ceilingReach);
-        walk = prefs.loadPrefs("walk", walk);
-        squats = prefs.loadPrefs("squats", squats);
-        backbends = prefs.loadPrefs("backbends", backbends);
-        hamstrings = prefs.loadPrefs("hamstrings", hamstrings);
-        adductor = prefs.loadPrefs("adductor", adductor);
-        figure4 = prefs.loadPrefs("figure4", figure4);
-        hipFlexor = prefs.loadPrefs("hipFlexor", hipFlexor);
-        quadStretch = prefs.loadPrefs("quadStretch", quadStretch);
-        volume = prefs.loadPrefs("volumeKey", volume);
+        repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
+        customReminderString = loadPrefs("customReminder", customReminderString);
+        blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
+        blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+        neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+        neckExtension = loadPrefs("neckExtension", neckExtension);
+        scapRetraction = loadPrefs("scapRetraction", scapRetraction);
+        chestStretch = loadPrefs("chestStretch", chestStretch);
+        ceilingReach = loadPrefs("ceilingReach", ceilingReach);
+        walk = loadPrefs("walk", walk);
+        squats = loadPrefs("squats", squats);
+        backbends = loadPrefs("backbends", backbends);
+        hamstrings = loadPrefs("hamstrings", hamstrings);
+        adductor = loadPrefs("adductor", adductor);
+        figure4 = loadPrefs("figure4", figure4);
+        hipFlexor = loadPrefs("hipFlexor", hipFlexor);
+        quadStretch = loadPrefs("quadStretch", quadStretch);
+        volume = loadPrefs("volumeKey", volume);
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
@@ -211,7 +211,7 @@ public class SettingsActivity extends Activity {
 
             public void onStopTrackingTouch(SeekBar seekBar) {
                 volume = (float) (((double) (progressChanged)) / 100);  //allows division w/ decimal results instead of integer results
-                prefs.savePrefs("volumeKey", volume);
+                savePrefs("volumeKey", volume);
                 Toast.makeText(SettingsActivity.this, "Audio volume is set to: " + progressChanged + " %", Toast.LENGTH_SHORT).show();
             }
         });
@@ -221,124 +221,124 @@ public class SettingsActivity extends Activity {
             public void onClick(View view) {
 
                 //The following code saves user preferences
-                prefs.savePrefs("volumeKey", volume);
+                savePrefs("volumeKey", volume);
 
                 if (blockWeekendsCheckBox.isChecked()){
-                    prefs.savePrefs("noWeekendsKey", true);
+                    savePrefs("noWeekendsKey", true);
                 } else{
-                    prefs.savePrefs("noWeekendsKey", false);
+                    savePrefs("noWeekendsKey", false);
                 }
 
                 if (blockNonWorkHoursCheckBox.isChecked()){
-                    prefs.savePrefs("workHoursOnlyKey", true);
+                    savePrefs("workHoursOnlyKey", true);
                 } else {
-                    prefs.savePrefs("workHoursOnlyKey", false);
+                    savePrefs("workHoursOnlyKey", false);
                 }
 
                 if (neckRetractionCheckBox.isChecked()){
-                    prefs.savePrefs("neckRetraction", true);
+                    savePrefs("neckRetraction", true);
                 } else {
-                    prefs.savePrefs("neckRetraction", false);
+                    savePrefs("neckRetraction", false);
                 }
 
                 if (neckExtensionCheckbox.isChecked()){
-                    prefs.savePrefs("neckExtension", true);
+                    savePrefs("neckExtension", true);
                 } else {
-                    prefs.savePrefs("neckExtension", false);
+                    savePrefs("neckExtension", false);
                 }
 
                 if (scapRetractionCheckBox.isChecked()){
-                    prefs.savePrefs("scapRetraction", true);
+                    savePrefs("scapRetraction", true);
                 } else {
-                    prefs.savePrefs("scapRetraction", false);
+                    savePrefs("scapRetraction", false);
                 }
 
                 if (chestStretchCheckBox.isChecked()) {
-                    prefs.savePrefs("chestStretch", true);
+                    savePrefs("chestStretch", true);
                 } else {
-                    prefs.savePrefs("chestStretch", false);
+                    savePrefs("chestStretch", false);
                 }
 
                 if (ceilingReachCheckbox.isChecked()) {
-                    prefs.savePrefs("ceilingReach", true);
+                    savePrefs("ceilingReach", true);
                 } else {
-                    prefs.savePrefs("ceilingReach", false);
+                    savePrefs("ceilingReach", false);
                 }
 
                 if (WalkCheckBox.isChecked()){
-                    prefs.savePrefs("walk", true);
+                    savePrefs("walk", true);
                 } else {
-                    prefs.savePrefs("walk", false);
+                    savePrefs("walk", false);
                 }
 
                 if (SquatsCheckBox.isChecked()){
-                    prefs.savePrefs("squats", true);
+                    savePrefs("squats", true);
                 } else {
-                    prefs.savePrefs("squats", false);
+                    savePrefs("squats", false);
                 }
 
                 if (BackBendsCheckBox.isChecked()){
-                    prefs.savePrefs("backbends", true);
+                    savePrefs("backbends", true);
                 } else {
-                    prefs.savePrefs("backbends", false);
+                    savePrefs("backbends", false);
                 }
 
                 if(HamstringsCheckBox.isChecked()){
-                    prefs.savePrefs("hamstrings", true);
+                    savePrefs("hamstrings", true);
                 } else {
-                    prefs.savePrefs("hamstrings", false);
+                    savePrefs("hamstrings", false);
                 }
 
                 if(adductorCheckBox.isChecked()){
-                    prefs.savePrefs("adductor", true);
+                    savePrefs("adductor", true);
                 } else {
-                    prefs.savePrefs("adductor", false);
+                    savePrefs("adductor", false);
                 }
 
                 if(figure4CheckBox.isChecked()){
-                    prefs.savePrefs("figure4", true);
+                    savePrefs("figure4", true);
                 } else {
-                    prefs.savePrefs("figure4", false);
+                    savePrefs("figure4", false);
                 }
 
                 if(hipFlexorCheckBox.isChecked()){
-                    prefs.savePrefs("hipFlexor", true);
+                    savePrefs("hipFlexor", true);
                 } else {
-                    prefs.savePrefs("hipFlexor", false);
+                    savePrefs("hipFlexor", false);
                 }
 
                 if(quadStretchCheckBox.isChecked()){
-                    prefs.savePrefs("quadStretch", true);
+                    savePrefs("quadStretch", true);
                 } else {
-                    prefs.savePrefs("quadStretch", false);
+                    savePrefs("quadStretch", false);
                 }
 
-                blockWeekendAlarms = prefs.loadPrefs("noWeekendsKey", blockWeekendAlarms);
-                blockNonWorkHoursAlarms = prefs.loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
-                neckRetraction = prefs.loadPrefs("neckRetraction", neckRetraction);
-                neckExtension = prefs.loadPrefs("neckExtension", neckExtension);
-                scapRetraction = prefs.loadPrefs("scapRetraction", scapRetraction);
-                chestStretch = prefs.loadPrefs("chestStretch", chestStretch);
-                ceilingReach = prefs.loadPrefs("ceilingReach", ceilingReach);
-                walk = prefs.loadPrefs("walk", walk);
-                squats = prefs.loadPrefs("squats", squats);
-                backbends = prefs.loadPrefs("backbends", backbends);
-                hamstrings = prefs.loadPrefs("hamstrings", hamstrings);
-                adductor = prefs.loadPrefs("adductor", adductor);
-                figure4 = prefs.loadPrefs("figure4", figure4);
-                hipFlexor = prefs.loadPrefs("hipFlexor", hipFlexor);
-                quadStretch = prefs.loadPrefs("quadStretch", quadStretch);
+                blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
+                blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
+                neckRetraction = loadPrefs("neckRetraction", neckRetraction);
+                neckExtension = loadPrefs("neckExtension", neckExtension);
+                scapRetraction = loadPrefs("scapRetraction", scapRetraction);
+                chestStretch = loadPrefs("chestStretch", chestStretch);
+                ceilingReach = loadPrefs("ceilingReach", ceilingReach);
+                walk = loadPrefs("walk", walk);
+                squats = loadPrefs("squats", squats);
+                backbends = loadPrefs("backbends", backbends);
+                hamstrings = loadPrefs("hamstrings", hamstrings);
+                adductor = loadPrefs("adductor", adductor);
+                figure4 = loadPrefs("figure4", figure4);
+                hipFlexor = loadPrefs("hipFlexor", hipFlexor);
+                quadStretch = loadPrefs("quadStretch", quadStretch);
 
                 customReminderString = CustomReminderEditText.getText() + "";
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
-               prefs.savePrefs("customReminder", customReminderString);
+               savePrefs("customReminder", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){
                         repeatIntervalInHours = 0;
-                        prefs.savePrefs("repeatIntervalKey", repeatIntervalInHours);
+                        savePrefs("repeatIntervalKey", repeatIntervalInHours);
                         finish();
                     }
                     else {
@@ -349,7 +349,7 @@ public class SettingsActivity extends Activity {
                                     Toast.LENGTH_LONG).show();
                         } else {
                             repeatIntervalInHours = Integer.valueOf(repeatIntervalAsString);
-                            prefs.savePrefs("repeatIntervalKey", repeatIntervalInHours);
+                            savePrefs("repeatIntervalKey", repeatIntervalInHours);
                             finish();
                         }
                     }
@@ -364,8 +364,8 @@ public class SettingsActivity extends Activity {
 
     }
 
-/*    //save prefs
-    public void prefs.savePrefs(String key, float value){
+    //save prefs
+    public void savePrefs(String key, float value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -373,47 +373,47 @@ public class SettingsActivity extends Activity {
         editor.commit();
     }
 
-    public void prefs.savePrefs(String key, int value){
+    public void savePrefs(String key, int value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
         editor.commit();
     }
 
-    public void prefs.savePrefs(String key, boolean value){
+    public void savePrefs(String key, boolean value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
         editor.commit();
     }
 
-    public void prefs.savePrefs(String key, String value){
+    public void savePrefs(String key, String value){
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.commit();
-    }*/
+    }
 
-/*    //get prefs
-    private float prefs.loadPrefs(String key,float value) {
+    //get prefs
+    private float loadPrefs(String key,float value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
          return sharedPreferences.getFloat(key, value);
     }
 
-    private int prefs.loadPrefs(String key,int value) {
+    private int loadPrefs(String key,int value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getInt(key, value);
     }
 
-    private boolean prefs.loadPrefs(String key,boolean value) {
+    private boolean loadPrefs(String key,boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
     }
 
-    private String prefs.loadPrefs(String key,String value) {
+    private String loadPrefs(String key,String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, value);
-    }*/
+    }
 
     @Override
     public void onDestroy() {
