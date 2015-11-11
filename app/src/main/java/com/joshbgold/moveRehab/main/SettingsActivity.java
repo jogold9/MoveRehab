@@ -352,7 +352,7 @@ public class SettingsActivity extends Activity {
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
-               savePrefs("premium", customReminderString);
+               savePrefs("customReminder", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){
