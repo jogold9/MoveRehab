@@ -17,6 +17,7 @@ import android.widget.ToggleButton;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.backend.AlarmReceiver;
+import com.joshbgold.moveRehab.backend.Key;
 import com.joshbgold.moveRehab.billing.IabHelper;
 import com.joshbgold.moveRehab.billing.IabResult;
 import com.joshbgold.moveRehab.billing.Inventory;
@@ -67,7 +68,7 @@ public class AlarmActivity extends Activity {
 
         playAudio();
 
-        mHelper = new IabHelper(this, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMimWebquXt5TkEPfgId874JGQrfgaCR9XLawRkZEbbvEQafr75JJK1uT9uAiRAA/nDCNN6VaLxWDhr4TiEwRP6be8B0jz/0xLRWgvu940RMSfpgMAdWz5ecSp0fFXlDRWQtP9mb4/9fj/34JzjCWBhw6dx+eQDyREhDbqyVbbAwT+f9ydnkM1RflJQPAKd76YJaElgjStDL7GhUOX23RfzWygSaBmYu8Si/NlnPbIZxcYT55kx0DaIjQF8NmWqvUXV8MW/OHS0ICYguvlAIOPdP/HG25RCDm7VMUiIPfRi8ycyep7KmLiWNUQsl1JmI/rXNFhNqTb4r3vUd248MBwIDAQAB");
+        mHelper = new IabHelper(this, Key.getPubKey());
         mHelper.queryInventoryAsync(mGotInventoryListener); //checks if user has purchased premium features, save result to boolean
         savePrefs("premium", mIsPremium);
 

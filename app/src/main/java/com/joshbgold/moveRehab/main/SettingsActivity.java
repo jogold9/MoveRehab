@@ -14,6 +14,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.joshbgold.moveRehab.R;
+import com.joshbgold.moveRehab.backend.Key;
 import com.joshbgold.moveRehab.backend.UniqueID;
 import com.joshbgold.moveRehab.billing.IabHelper;
 import com.joshbgold.moveRehab.billing.IabResult;
@@ -55,11 +56,8 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //for in-app billing... I had this in key stored in separate class but accidentally deleted in Github merge
-        String PublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMimWebquXt5TkEPfgId874JGQrfgaCR9XLawRkZEbbvEQafr75JJK1uT9uAiRAA/nDCNN6VaLxWDhr4TiEwRP6be8B0jz/0xLRWgvu940RMSfpgMAdWz5ecSp0fFXlDRWQtP9mb4/9fj/34JzjCWBhw6dx+eQDyREhDbqyVbbAwT+f9ydnkM1RflJQPAKd76YJaElgjStDL7GhUOX23RfzWygSaBmYu8Si/NlnPbIZxcYT55kx0DaIjQF8NmWqvUXV8MW/OHS0ICYguvlAIOPdP/HG25RCDm7VMUiIPfRi8ycyep7KmLiWNUQsl1JmI/rXNFhNqTb4r3vUd248MBwIDAQAB";
-
         // compute your public key and store it in base64EncodedPublicKey
-        mHelper = new IabHelper(this, (PublicKey));
+        mHelper = new IabHelper(this, Key.getPubKey());
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
