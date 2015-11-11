@@ -56,7 +56,7 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // compute your public key and store it in base64EncodedPublicKey
+        // initialize in-app building object mHelper for in-app billing
         mHelper = new IabHelper(this, Key.getPubKey());
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -352,7 +352,7 @@ public class SettingsActivity extends Activity {
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
-               savePrefs("customReminder", customReminderString);
+               savePrefs("premium", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){

@@ -17,10 +17,7 @@ import android.widget.ToggleButton;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.backend.AlarmReceiver;
-import com.joshbgold.moveRehab.backend.Key;
 import com.joshbgold.moveRehab.billing.IabHelper;
-import com.joshbgold.moveRehab.billing.IabResult;
-import com.joshbgold.moveRehab.billing.Inventory;
 
 import java.util.Calendar;
 
@@ -68,9 +65,9 @@ public class AlarmActivity extends Activity {
 
         playAudio();
 
-        mHelper = new IabHelper(this, Key.getPubKey());
+     /*   mHelper = new IabHelper(this, Key.getPubKey());
         mHelper.queryInventoryAsync(mGotInventoryListener); //checks if user has purchased premium features, save result to boolean
-        savePrefs("premium", mIsPremium);
+        savePrefs("premium", mIsPremium);*/
 
         View.OnClickListener goToSettings = new View.OnClickListener(){
             @Override
@@ -234,7 +231,7 @@ public class AlarmActivity extends Activity {
         }
     }
 
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener
+ /*   IabHelper.QueryInventoryFinishedListener mGotInventoryListener
             = new IabHelper.QueryInventoryFinishedListener() {
         public void onQueryInventoryFinished(IabResult result,
                                              Inventory inventory) {
@@ -248,6 +245,6 @@ public class AlarmActivity extends Activity {
                 mIsPremium = inventory.hasPurchase("custom_reminders");
             }
         }
-    };
+    };*/
 
   }
