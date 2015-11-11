@@ -44,10 +44,10 @@ public class SettingsActivity extends Activity {
     private boolean quadStretch = false;
 
     //for in-app billing (IAB). See developer.android.com/training/in-app-billing/preparing-iab-app.html#Connect
-    private boolean hasPurchasedCustomReminders = false;
+    private boolean purchasedCustomReminders = false;
     private String MACAddress = "";
     private String productID = "custom_reminders";  //product ID for premium custom reminders feature
-    private int requestCode = 10001;
+    private int requestCode = 22222;
     IabHelper mHelper;
 
     @Override
@@ -109,7 +109,7 @@ public class SettingsActivity extends Activity {
         hipFlexor = loadPrefs("hipFlexor", hipFlexor);
         quadStretch = loadPrefs("quadStretch", quadStretch);
         volume = loadPrefs("volumeKey", volume);
-        hasPurchasedCustomReminders = loadPrefs("premium", hasPurchasedCustomReminders);
+        purchasedCustomReminders = loadPrefs("premium", purchasedCustomReminders);
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
@@ -228,7 +228,7 @@ public class SettingsActivity extends Activity {
         CustomReminderEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!hasPurchasedCustomReminders){
+                if (!purchasedCustomReminders){
                     MACAddress = UniqueID.getMACAddress("wlan0");
                     mHelper.launchPurchaseFlow(SettingsActivity.this, productID, requestCode, mPurchaseFinishedListener, MACAddress);
                 }
@@ -350,7 +350,7 @@ public class SettingsActivity extends Activity {
                 figure4 = loadPrefs("figure4", figure4);
                 hipFlexor = loadPrefs("hipFlexor", hipFlexor);
                 quadStretch = loadPrefs("quadStretch", quadStretch);
-                hasPurchasedCustomReminders = loadPrefs("premium", hasPurchasedCustomReminders);
+                purchasedCustomReminders = loadPrefs("premium", purchasedCustomReminders);
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
@@ -465,13 +465,12 @@ public class SettingsActivity extends Activity {
         {
             if (result.isFailure()) {
                 Log.d("Oh noes!", "Error purchasing: " + result);
-                return;
             }
 
             else if (purchase.getSku().equals(productID)) {
                 // give user access to premium content and update the UI
-                hasPurchasedCustomReminders = true;
-                savePrefs("premium", hasPurchasedCustomReminders);
+                purchasedCustomReminders = true;
+                savePrefs("premium", true);
             }
         }
     };

@@ -17,6 +17,9 @@ import android.widget.ToggleButton;
 
 import com.joshbgold.moveRehab.R;
 import com.joshbgold.moveRehab.backend.AlarmReceiver;
+import com.joshbgold.moveRehab.billing.IabHelper;
+import com.joshbgold.moveRehab.billing.IabResult;
+import com.joshbgold.moveRehab.billing.Inventory;
 
 import java.util.Calendar;
 
@@ -35,7 +38,8 @@ public class AlarmActivity extends Activity {
     int repeatIntervalMilliseconds = 0;
     private int hourSet = 0;
     private int minuteSet = 0;
-    private boolean hasPurchasedCustomReminders = false;
+    private boolean mIsPremium = false;  //stores whether user has purchased premium features
+    IabHelper mHelper;
 
     //http://developer.android.com/reference/java/util/Calendar.html#compareTo(java.util.Calendar)
     //0 if the times of the two Calendars are equal, -1 if the time of this Calendar is before the other one, 1 if the time of this Calendar is after the other one.
@@ -63,8 +67,8 @@ public class AlarmActivity extends Activity {
 
         playAudio();
 
-        queryGoogleForPurchases(); //checks if user has purchased premium features, save result to boolean
-        savePrefs("premium", hasPurchasedCustomReminders);
+        mHelper.queryInventoryAsync(mGotInventoryListener); //checks if user has purchased premium features, save result to boolean
+        savePrefs("premium", mIsPremium);
 
         View.OnClickListener goToSettings = new View.OnClickListener(){
             @Override
@@ -227,5 +231,21 @@ public class AlarmActivity extends Activity {
             Log.d("Alarm Activity", e.toString());
         }
     }
+
+    IabHelper.QueryInventoryFinishedListener mGotInventoryListener
+            = new IabHelper.QueryInventoryFinishedListener() {
+        public void onQueryInventoryFinished(IabResult result,
+                                             Inventory inventory) {
+
+            if (result.isFailure()) {
+                // handle error here
+                Log.d("Oh noes", "Sorry, not able to get purchase status for custom reminders.");
+            }
+            else {
+                // Stores whether the user have the premium upgrade
+                mIsPremium = inventory.hasPurchase("custom_reminders");
+            }
+        }
+    };
 
   }
