@@ -90,7 +90,6 @@ public class SettingsActivity extends Activity {
         final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
 
         repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
-        customReminderString = loadPrefs("customReminder", customReminderString);
         blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
         blockNonWorkHoursAlarms = loadPrefs("workHoursOnlyKey", blockNonWorkHoursAlarms);
         neckRetraction = loadPrefs("neckRetraction", neckRetraction);
@@ -108,6 +107,7 @@ public class SettingsActivity extends Activity {
         quadStretch = loadPrefs("quadStretch", quadStretch);
         volume = loadPrefs("volumeKey", volume);
         purchasedCustomReminders = loadPrefs("premium", purchasedCustomReminders);
+        customReminderString = loadPrefs("customReminder", customReminderString);
 
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
@@ -230,9 +230,10 @@ public class SettingsActivity extends Activity {
                     MACAddress = UniqueID.getMACAddress("wlan0");
                     mHelper.launchPurchaseFlow(SettingsActivity.this, productID, requestCode, mPurchaseFinishedListener, MACAddress);
                 }
-                else{ //user has already purchased custom reminders
+            /*    else{ //user has already purchased custom reminders, just let them type in their text
                     customReminderString = CustomReminderEditText.getText() + "";
-                }
+                    savePrefs("customReminder", customReminderString);
+                }*/
             }
         });
 
@@ -349,10 +350,12 @@ public class SettingsActivity extends Activity {
                 hipFlexor = loadPrefs("hipFlexor", hipFlexor);
                 quadStretch = loadPrefs("quadStretch", quadStretch);
                 purchasedCustomReminders = loadPrefs("premium", purchasedCustomReminders);
+                customReminderString = loadPrefs("customReminder", customReminderString);
+
+                customReminderString = CustomReminderEditText.getText() + "";
+                savePrefs("customReminder", customReminderString);
 
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
-
-               savePrefs("customReminder", customReminderString);
 
                 try {
                     if (repeatIntervalAsString.equals("")){
