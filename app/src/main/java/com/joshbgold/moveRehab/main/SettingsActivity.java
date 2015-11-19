@@ -71,6 +71,7 @@ public class SettingsActivity extends Activity {
             }
         });
 
+        
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
         final EditText CustomReminderEditText = (EditText) findViewById(R.id.AddYourOwn);
         final Button backButton = (Button) findViewById(R.id.backButton);
