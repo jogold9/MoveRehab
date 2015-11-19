@@ -72,22 +72,22 @@ public class SettingsActivity extends Activity {
         final EditText repeatIntervalEditText = (EditText) findViewById(R.id.repeatIntervalInMinutes);
         final EditText CustomReminderEditText = (EditText) findViewById(R.id.AddYourOwn);
         final Button backButton = (Button) findViewById(R.id.backButton);
-        final CheckBox blockWeekendsCheckBox = (CheckBox)findViewById(R.id.blockWeekends);
-        final CheckBox blockNonWorkHoursCheckBox = (CheckBox)findViewById(R.id.blockNonWorkDayHours);
-        final CheckBox neckRetractionCheckBox = (CheckBox)findViewById(R.id.NeckRetraction);
-        final CheckBox neckExtensionCheckbox = (CheckBox)findViewById(R.id.NeckExtension);
-        final CheckBox scapRetractionCheckBox = (CheckBox)findViewById(R.id.ScapularRetraction);
-        final CheckBox chestStretchCheckBox = (CheckBox)findViewById(R.id.ChestStretch);
-        final CheckBox ceilingReachCheckbox = (CheckBox)findViewById(R.id.ReachToCeiling);
-        final CheckBox WalkCheckBox = (CheckBox)findViewById(R.id.Walk);
-        final CheckBox SquatsCheckBox = (CheckBox)findViewById(R.id.Squats);
-        final CheckBox BackBendsCheckBox = (CheckBox)findViewById(R.id.StandingBackBends);
-        final CheckBox HamstringsCheckBox = (CheckBox)findViewById(R.id.Hamstrings);
-        final CheckBox adductorCheckBox = (CheckBox)findViewById(R.id.adductor);
-        final CheckBox figure4CheckBox = (CheckBox)findViewById(R.id.figure4);
-        final CheckBox hipFlexorCheckBox = (CheckBox)findViewById(R.id.hipFlexor);
-        final CheckBox quadStretchCheckBox = (CheckBox)findViewById(R.id.standingQuadStretch);
-        final SeekBar volumeControl = (SeekBar)findViewById(R.id.volumeSeekBar);
+        final CheckBox blockWeekendsCheckBox = (CheckBox) findViewById(R.id.blockWeekends);
+        final CheckBox blockNonWorkHoursCheckBox = (CheckBox) findViewById(R.id.blockNonWorkDayHours);
+        final CheckBox neckRetractionCheckBox = (CheckBox) findViewById(R.id.NeckRetraction);
+        final CheckBox neckExtensionCheckbox = (CheckBox) findViewById(R.id.NeckExtension);
+        final CheckBox scapRetractionCheckBox = (CheckBox) findViewById(R.id.ScapularRetraction);
+        final CheckBox chestStretchCheckBox = (CheckBox) findViewById(R.id.ChestStretch);
+        final CheckBox ceilingReachCheckbox = (CheckBox) findViewById(R.id.ReachToCeiling);
+        final CheckBox WalkCheckBox = (CheckBox) findViewById(R.id.Walk);
+        final CheckBox SquatsCheckBox = (CheckBox) findViewById(R.id.Squats);
+        final CheckBox BackBendsCheckBox = (CheckBox) findViewById(R.id.StandingBackBends);
+        final CheckBox HamstringsCheckBox = (CheckBox) findViewById(R.id.Hamstrings);
+        final CheckBox adductorCheckBox = (CheckBox) findViewById(R.id.adductor);
+        final CheckBox figure4CheckBox = (CheckBox) findViewById(R.id.figure4);
+        final CheckBox hipFlexorCheckBox = (CheckBox) findViewById(R.id.hipFlexor);
+        final CheckBox quadStretchCheckBox = (CheckBox) findViewById(R.id.standingQuadStretch);
+        final SeekBar volumeControl = (SeekBar) findViewById(R.id.volumeSeekBar);
 
         repeatIntervalInHours = loadPrefs("repeatIntervalKey", repeatIntervalInHours);
         blockWeekendAlarms = loadPrefs("noWeekendsKey", blockWeekendAlarms);
@@ -112,98 +112,25 @@ public class SettingsActivity extends Activity {
         volumeControl.setProgress((int) (volume * 100));
         repeatIntervalEditText.setText(repeatIntervalInHours + "");
 
-        if(customReminderString != null && !customReminderString.isEmpty()) {
+        if (customReminderString != null && !customReminderString.isEmpty()) {
             CustomReminderEditText.setText(customReminderString);
         }
 
-        if (blockWeekendAlarms) {
-            blockWeekendsCheckBox.setChecked(true);
-        } else {
-            blockWeekendsCheckBox.setChecked(false);
-        }
-
-        if (blockNonWorkHoursAlarms) {
-            blockNonWorkHoursCheckBox.setChecked(true);
-        } else {
-            blockNonWorkHoursCheckBox.setChecked(false);
-        }
-
-        if (neckRetraction){
-            neckRetractionCheckBox.setChecked(true);
-        } else {
-            neckRetractionCheckBox.setChecked(false);
-        }
-
-        if (neckExtension){
-            neckExtensionCheckbox.setChecked(true);
-        } else {
-            neckExtensionCheckbox.setChecked(false);
-        }
-
-        if (scapRetraction){
-            scapRetractionCheckBox.setChecked(true);
-        } else {
-            scapRetractionCheckBox.setChecked(false);
-        }
-
-        if (chestStretch){
-            chestStretchCheckBox.setChecked(true);
-        } else {
-            chestStretchCheckBox.setChecked(false);
-        }
-
-        if (ceilingReach) {
-            ceilingReachCheckbox.setChecked(true);
-        } else {
-            ceilingReachCheckbox.setChecked(false);
-        }
-
-        if (walk) {
-            WalkCheckBox.setChecked(true);
-        } else {
-            WalkCheckBox.setChecked(false);
-        }
-
-        if (squats){
-            SquatsCheckBox.setChecked(true);
-        } else {
-            SquatsCheckBox.setChecked(false);
-        }
-
-        if (backbends){
-            BackBendsCheckBox.setChecked(true);
-        } else {
-            BackBendsCheckBox.setChecked(false);
-        }
-
-        if (hamstrings){
-            HamstringsCheckBox.setChecked(true);
-        } else {
-            HamstringsCheckBox.setChecked(false );
-        }
-        if (adductor){
-            adductorCheckBox.setChecked(true);
-        } else {
-            adductorCheckBox.setChecked(false);
-        }
-
-        if (figure4){
-            figure4CheckBox.setChecked(true);
-        } else {
-            figure4CheckBox.setChecked(false);
-        }
-
-        if(hipFlexor){
-            hipFlexorCheckBox.setChecked(true);
-        } else {
-            hipFlexorCheckBox.setChecked(false);
-        }
-
-        if(quadStretch){
-            quadStretchCheckBox.setChecked(true);
-        } else {
-            quadStretchCheckBox.setChecked(false);
-        }
+        blockWeekendsCheckBox.setChecked(blockWeekendAlarms);
+        blockNonWorkHoursCheckBox.setChecked(blockNonWorkHoursAlarms);
+        neckRetractionCheckBox.setChecked(neckRetraction);
+        neckExtensionCheckbox.setChecked(neckExtension);
+        scapRetractionCheckBox.setChecked(scapRetraction);
+        chestStretchCheckBox.setChecked(chestStretch);
+        ceilingReachCheckbox.setChecked(ceilingReach);
+        WalkCheckBox.setChecked(walk);
+        SquatsCheckBox.setChecked(squats);
+        BackBendsCheckBox.setChecked(backbends);
+        HamstringsCheckBox.setChecked(hamstrings);
+        adductorCheckBox.setChecked(adductor);
+        figure4CheckBox.setChecked(figure4);
+        hipFlexorCheckBox.setChecked(hipFlexor);
+        quadStretchCheckBox.setChecked(quadStretch);
 
         volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 0;
@@ -226,7 +153,7 @@ public class SettingsActivity extends Activity {
         CustomReminderEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!purchasedCustomReminders){
+                if (!purchasedCustomReminders) {
                     MACAddress = UniqueID.getMACAddress("wlan0");
                     mHelper.launchPurchaseFlow(SettingsActivity.this, productID, requestCode, mPurchaseFinishedListener, MACAddress);
                 }
@@ -244,31 +171,31 @@ public class SettingsActivity extends Activity {
                 //The following code saves user preferences
                 savePrefs("volumeKey", volume);
 
-                if (blockWeekendsCheckBox.isChecked()){
+                if (blockWeekendsCheckBox.isChecked()) {
                     savePrefs("noWeekendsKey", true);
-                } else{
+                } else {
                     savePrefs("noWeekendsKey", false);
                 }
 
-                if (blockNonWorkHoursCheckBox.isChecked()){
+                if (blockNonWorkHoursCheckBox.isChecked()) {
                     savePrefs("workHoursOnlyKey", true);
                 } else {
                     savePrefs("workHoursOnlyKey", false);
                 }
 
-                if (neckRetractionCheckBox.isChecked()){
+                if (neckRetractionCheckBox.isChecked()) {
                     savePrefs("neckRetraction", true);
                 } else {
                     savePrefs("neckRetraction", false);
                 }
 
-                if (neckExtensionCheckbox.isChecked()){
+                if (neckExtensionCheckbox.isChecked()) {
                     savePrefs("neckExtension", true);
                 } else {
                     savePrefs("neckExtension", false);
                 }
 
-                if (scapRetractionCheckBox.isChecked()){
+                if (scapRetractionCheckBox.isChecked()) {
                     savePrefs("scapRetraction", true);
                 } else {
                     savePrefs("scapRetraction", false);
@@ -286,49 +213,49 @@ public class SettingsActivity extends Activity {
                     savePrefs("ceilingReach", false);
                 }
 
-                if (WalkCheckBox.isChecked()){
+                if (WalkCheckBox.isChecked()) {
                     savePrefs("walk", true);
                 } else {
                     savePrefs("walk", false);
                 }
 
-                if (SquatsCheckBox.isChecked()){
+                if (SquatsCheckBox.isChecked()) {
                     savePrefs("squats", true);
                 } else {
                     savePrefs("squats", false);
                 }
 
-                if (BackBendsCheckBox.isChecked()){
+                if (BackBendsCheckBox.isChecked()) {
                     savePrefs("backbends", true);
                 } else {
                     savePrefs("backbends", false);
                 }
 
-                if(HamstringsCheckBox.isChecked()){
+                if (HamstringsCheckBox.isChecked()) {
                     savePrefs("hamstrings", true);
                 } else {
                     savePrefs("hamstrings", false);
                 }
 
-                if(adductorCheckBox.isChecked()){
+                if (adductorCheckBox.isChecked()) {
                     savePrefs("adductor", true);
                 } else {
                     savePrefs("adductor", false);
                 }
 
-                if(figure4CheckBox.isChecked()){
+                if (figure4CheckBox.isChecked()) {
                     savePrefs("figure4", true);
                 } else {
                     savePrefs("figure4", false);
                 }
 
-                if(hipFlexorCheckBox.isChecked()){
+                if (hipFlexorCheckBox.isChecked()) {
                     savePrefs("hipFlexor", true);
                 } else {
                     savePrefs("hipFlexor", false);
                 }
 
-                if(quadStretchCheckBox.isChecked()){
+                if (quadStretchCheckBox.isChecked()) {
                     savePrefs("quadStretch", true);
                 } else {
                     savePrefs("quadStretch", false);
@@ -358,14 +285,13 @@ public class SettingsActivity extends Activity {
                 repeatIntervalAsString = repeatIntervalEditText.getText() + "";
 
                 try {
-                    if (repeatIntervalAsString.equals("")){
+                    if (repeatIntervalAsString.equals("")) {
                         repeatIntervalInHours = 0;
                         savePrefs("repeatIntervalKey", repeatIntervalInHours);
                         finish();
-                    }
-                    else {
+                    } else {
                         Integer repeatIntervalAsInt = Integer.parseInt(repeatIntervalAsString);
-                        if (repeatIntervalAsInt != 0 && repeatIntervalAsInt < 1 || repeatIntervalAsInt > 24){
+                        if (repeatIntervalAsInt != 0 && repeatIntervalAsInt < 1 || repeatIntervalAsInt > 24) {
                             Toast.makeText(SettingsActivity.this, "Please enter a number between 1 and 24 for the repeat interval, or leave blank " +
                                             "for a one-time alarm.",
                                     Toast.LENGTH_LONG).show();
@@ -387,7 +313,7 @@ public class SettingsActivity extends Activity {
     }
 
     //save prefs
-    public void savePrefs(String key, float value){
+    public void savePrefs(String key, float value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -395,21 +321,21 @@ public class SettingsActivity extends Activity {
         editor.commit();
     }
 
-    public void savePrefs(String key, int value){
+    public void savePrefs(String key, int value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
         editor.commit();
     }
 
-    public void savePrefs(String key, boolean value){
+    public void savePrefs(String key, boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
         editor.commit();
     }
 
-    public void savePrefs(String key, String value){
+    public void savePrefs(String key, String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
@@ -417,22 +343,22 @@ public class SettingsActivity extends Activity {
     }
 
     //get prefs
-    private float loadPrefs(String key,float value) {
+    private float loadPrefs(String key, float value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
-         return sharedPreferences.getFloat(key, value);
+        return sharedPreferences.getFloat(key, value);
     }
 
-    private int loadPrefs(String key,int value) {
+    private int loadPrefs(String key, int value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getInt(key, value);
     }
 
-    private boolean loadPrefs(String key,boolean value) {
+    private boolean loadPrefs(String key, boolean value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, value);
     }
 
-    private String loadPrefs(String key,String value) {
+    private String loadPrefs(String key, String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("MoveAppPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, value);
     }
@@ -445,7 +371,7 @@ public class SettingsActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("Uh oh!", "onActivityResult(" + requestCode + "," + resultCode + "," + data);
 
         // Pass on the activity result to the helper for handling
@@ -454,21 +380,17 @@ public class SettingsActivity extends Activity {
             // perform any handling of activity results not related to in-app
             // billing...
             super.onActivityResult(requestCode, resultCode, data);
-        }
-        else {
+        } else {
             Log.d("Uh oh!", "onActivityResult handled by IABUtil.");
         }
     }
 
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
             = new IabHelper.OnIabPurchaseFinishedListener() {
-        public void onIabPurchaseFinished(IabResult result, Purchase purchase)
-        {
+        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
             if (result.isFailure()) {
                 Log.d("Oh noes!", "Error purchasing: " + result);
-            }
-
-            else if (purchase.getSku().equals(productID)) {
+            } else if (purchase.getSku().equals(productID)) {
                 // give user access to premium content and update the UI
                 purchasedCustomReminders = true;
                 savePrefs("premium", true);
