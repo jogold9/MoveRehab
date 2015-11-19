@@ -57,7 +57,9 @@ public class SettingsActivity extends Activity {
         setContentView(R.layout.activity_settings);
 
         // initialize in-app building object mHelper for in-app billing
-        mHelper = new IabHelper(this, Key.getPubKey());
+        String base64EncodedPublicKey = Key.getPubKey();
+
+        mHelper = new IabHelper(this, base64EncodedPublicKey);
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
