@@ -58,8 +58,7 @@ public class SettingsActivity extends Activity {
 
         // initialize in-app building object mHelper for in-app billing
         String base64EncodedPublicKey = Key.getPubKey();
-
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
+        mHelper = new IabHelper(SettingsActivity.this, base64EncodedPublicKey);
 
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
             public void onIabSetupFinished(IabResult result) {
@@ -157,6 +156,10 @@ public class SettingsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (!purchasedCustomReminders) {
+                    //query purchased items http://stackoverflow.com/questions/19195864/android-inapp-billing-error-response-7item-already-owned
+                    //mHelper.queryInventoryAsync(mGotInventoryListener);
+
+                    //if not purchased, launch purchase flow
                     MACAddress = UniqueID.getMACAddress("wlan0");
                     mHelper.launchPurchaseFlow(SettingsActivity.this, productID, requestCode, mPurchaseFinishedListener, MACAddress);
                 }
