@@ -20,7 +20,7 @@ public class AlarmService extends IntentService {
     @Override
     public void onHandleIntent(Intent intent) {
 
-            sendNotification("Move reminder");
+             sendNotification("Move reminder");
 
     }
 
